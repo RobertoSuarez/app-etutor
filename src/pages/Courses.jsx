@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../components/styles/Card.css";
 import { FcClock } from "react-icons/fc";
 import { BsBarChartFill } from "react-icons/bs";
@@ -6,45 +6,32 @@ import { BiRupee } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import imagePlaceholder from "../placeholder-image.jpg";
+import useCourses from "../hooks/useCourses";
 
-class Courses extends React.Component {
-  // Constructor
-  constructor(props) {
-    super(props);
+export default function Courses() {
 
-    this.state = {
-      items: [],
-      DataisLoaded: false,
-    };
-  }
+  const { courses, isLoading, error } = useCourses()
 
-  // ComponentDidMount is used to
-  // execute the code
-  componentDidMount() {
-    fetch("http://localhost:5000/api/course")
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({
-          items: json,
-          DataisLoaded: true,
-        });
-      });
-  }
-  render() {
-    const { DataisLoaded, items } = this.state;
-    if (!DataisLoaded)
+  useEffect(() => {
+  
+    console.log(courses)
+
+  }, [courses])
+
+  
+  if (isLoading)
       return (
         <div className="loader">
         <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
       </div>
       );
 
-    return (
-      <div className="page">
+  return (
+    <div className="page">
         <br />
         <h1 className="flex"> All Courses </h1>{" "}
         <div className="course-grid">
-          {items.courses.map((item) => (
+          {courses && courses.courses.map((item) => (
             <div className="card" key={item._id}>
               <img src={item.image || imagePlaceholder} alt={item.title} className="card-img" />
               <div className="card-content">
@@ -81,8 +68,6 @@ class Courses extends React.Component {
           ))}
         </div>
       </div>
-    );
-  }
+  )
 }
 
-export default Courses;
