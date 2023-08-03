@@ -34,11 +34,20 @@
   border-radius: 1rem;
 }
 
-:root {
+/* :root {
   --primary-bg: #fff;
   --secondary-bg: #f7f7f7;
   --primary-text: #000;
   --gutter: 1rem;
+} */
+
+:root {
+  --primary-color: #322653;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
 }
 
 body {

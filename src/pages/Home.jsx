@@ -1,8 +1,9 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import { Link } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import Typewriter from 'typewriter-effect';
 import Footer from '../components/Footer';
+import { Button } from '@mui/material';
 
 export default function Home() {
   const { user } = useUserAuth();
@@ -16,7 +17,10 @@ export default function Home() {
     <div className="home page">
       <div className="hero">
         <h1 className="banner-heading1">Start Learning From </h1>
-        <span className="banner-heading2">The World's Best Teachers</span>
+        <Button color="primary" variant="contained">
+          Hola, mundo
+        </Button>
+        <span className="banner-heading2">The Worlds Best Teachers</span>
 
         <div className="content">
           <p>
