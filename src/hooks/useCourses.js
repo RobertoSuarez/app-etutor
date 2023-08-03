@@ -4,7 +4,7 @@ import { useEffect } from "react"
 
 
 
-export default function useCourses() {
+export default function useCourses(input) {
     
     const [courses, setCourses] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -13,6 +13,7 @@ export default function useCourses() {
     const getCourses = async () => {
         
         setIsLoading(true)
+        setError(null)
         try {
             const response = await fetch(`${BASE_URL}/api/course`)
             const data = await response.json()
@@ -20,9 +21,8 @@ export default function useCourses() {
             setIsLoading(false)
             setError(null)
         } catch(error) {
-            console.log(error)
             setError(error)
-            isLoading(false)
+            setIsLoading(false)
         }
     }
 
@@ -30,7 +30,7 @@ export default function useCourses() {
         
         getCourses()
 
-    }, [])
+    }, [input])
 
     return {
         courses,

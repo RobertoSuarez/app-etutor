@@ -534,7 +534,7 @@ a{
 
 /* loader ends */
 
-.search-box{
+/* .search-box {
   height: 70px;
   width: 500px;
   overflow: hidden;
@@ -547,7 +547,7 @@ a{
 
 .search-box:hover{
   height: 120px;
-}
+} */
 
 
 .cr-title{
@@ -660,4 +660,10 @@ option{
 
 .green{
   background-color: #97c840;
+}
+
+.texto-base {
+  font-size: 1rem;
+  font-weight: normal;
+  color: black;
 }
