@@ -1,9 +1,8 @@
-import { React, useState } from "react";
-import { Link } from "react-router-dom";
-import { useUserAuth } from "../context/UserAuthContext";
-import Typewriter from "typewriter-effect";
-import Footer from "../components/Footer";
-
+import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useUserAuth } from '../context/UserAuthContext';
+import Typewriter from 'typewriter-effect';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const { user } = useUserAuth();
@@ -27,7 +26,7 @@ export default function Home() {
           </p>
           <Typewriter
             options={{
-              strings: ["Learn From Anywhere", "Learn Without Limits"],
+              strings: ['Learn From Anywhere', 'Learn Without Limits'],
               autoStart: true,
               loop: true,
             }}

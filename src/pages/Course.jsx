@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function Course() {
   const [course, setCourse] = useState({
@@ -51,7 +51,7 @@ function Course() {
   //     tearcherId = course.items.course.user._id;
   //     console.log(tearcherId);
   //     return fetchTeacherData();
-      
+
   //   }
   // }, []);
 
@@ -74,30 +74,31 @@ function Course() {
       <div className="cr-title">{course.items.course.title}</div>
       <div className="course p-2">
         <div>
-        <iframe
-          width="560"
-          src={`https://www.youtube.com/embed/${course.items.course.video}`}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="video"
-        ></iframe>
+          <iframe
+            width="560"
+            src={`https://www.youtube.com/embed/${course.items.course.video}`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="video"
+          ></iframe>
 
-        <h3>About The Course</h3>
-        <div className="course-description">
-          {course.items.course.description}
-        </div>
-        <br />
-        {/* {console.log(teacher.items[0])} */}
-        {/* <h3>Other Courses by</h3> */}
-        {/* {course.teacher.} */}
-        <h3>Comments / Questions</h3>
-        <p>No Comments</p>
+          <h3>About The Course</h3>
+          <div className="course-description">
+            {course.items.course.description}
+          </div>
+          <br />
+          {/* {console.log(teacher.items[0])} */}
+          {/* <h3>Other Courses by</h3> */}
+          {/* {course.teacher.} */}
+          <h3>Comments / Questions</h3>
+          <p>No Comments</p>
         </div>
         <div>
           <h3>Course Details</h3>
-          <span>Course Level: {course.items.course.level}</span><br />
+          <span>Course Level: {course.items.course.level}</span>
+          <br />
           <span>Course Duration: {course.items.course.time}</span>
         </div>
         <br />
