@@ -1,7 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
-import { UserAuthContextProvider } from './context/UserAuthContext';
 
 // Compontent import
 import Navbar from './components/Navbar';
@@ -20,63 +19,59 @@ import Signup from './components/Signup';
 import Course from './pages/Course';
 
 import React from 'react';
-import { ThemeProvider } from '@mui/material';
-import { theme } from './Theme';
 import { AppNavBar } from './components/AppNavBar';
 
 export const App = () => {
   return (
-    <UserAuthContextProvider>
-      <ThemeProvider theme={theme}>
-        <AppNavBar />
-        <div className="app-wrap">
-          <Navbar />
+    <>
+      <AppNavBar />
+      <div className="app-wrap">
+        <Navbar />
 
-          <Sidebar />
-          <div className="app">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/learning"
-                element={
-                  <ProtectedRoute>
-                    <Learning />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/cart"
-                element={
-                  <ProtectedRoute>
-                    <Cart />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/settings"
-                element={
-                  <ProtectedRoute>
-                    <Settings />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/about" element={<About />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route
-                path="/learning/:id"
-                element={
-                  <ProtectedRoute>
-                    <Course />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </div>
+        <Sidebar />
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/learning"
+              element={
+                <ProtectedRoute>
+                  <Learning />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/about" element={<About />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/learning/:id"
+              element={
+                <ProtectedRoute>
+                  <Course />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
         </div>
-      </ThemeProvider>
-    </UserAuthContextProvider>
+      </div>
+    </>
   );
 };
