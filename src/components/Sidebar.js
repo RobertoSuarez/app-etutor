@@ -1,21 +1,21 @@
-import { Link } from "react-router-dom";
-import React from "react";
-import { useNavigate } from "react-router";
-import { useUserAuth } from "../context/UserAuthContext";
-import { useState } from "react";
-import ProfileImage from "../avatar.png";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import { Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router';
+import { useUserAuth } from '../context/UserAuthContext';
+import { useState } from 'react';
+import ProfileImage from '../avatar.png';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
 
-import { AiFillHome } from "react-icons/ai";
-import { ImBooks } from "react-icons/im";
-import { FaBookReader } from "react-icons/fa";
-import { IoMdCart } from "react-icons/io";
+import { AiFillHome } from 'react-icons/ai';
+import { ImBooks } from 'react-icons/im';
+import { FaBookReader } from 'react-icons/fa';
+import { IoMdCart } from 'react-icons/io';
 import {
   RiUserSettingsFill,
   RiMessage2Fill,
   RiInformationFill,
-} from "react-icons/ri";
+} from 'react-icons/ri';
 
 export default function Sidebar() {
   const [sidebar, setSidebar] = useState(false);
@@ -31,39 +31,39 @@ export default function Sidebar() {
 
   const Links = [
     {
-      title: "Home",
+      title: 'Home',
       icon: <AiFillHome />,
-      path: "/",
+      path: '/',
     },
     {
-      title: "All Courses",
+      title: 'All Courses',
       icon: <ImBooks />,
-      path: "/courses",
+      path: '/courses',
     },
     {
-      title: "My Learning",
+      title: 'My Learning',
       icon: <FaBookReader />,
-      path: "/learning",
+      path: '/learning',
     },
     {
-      title: "My Cart",
+      title: 'My Cart',
       icon: <IoMdCart />,
-      path: "/cart",
+      path: '/cart',
     },
     {
-      title: "Account Settings",
+      title: 'Account Settings',
       icon: <RiUserSettingsFill />,
-      path: "/settings",
+      path: '/settings',
     },
     {
-      title: "Contact Us",
+      title: 'Contact Us',
       icon: <RiMessage2Fill />,
-      path: "/contact",
+      path: '/contact',
     },
     {
-      title: "About Us",
+      title: 'About Us',
       icon: <RiInformationFill />,
-      path: "/about",
+      path: '/about',
     },
   ];
 
@@ -73,7 +73,7 @@ export default function Sidebar() {
         =
       </div>
       <div
-        className={sidebar ? "sidebar active-sidebar" : "sidebar"}
+        className={sidebar ? 'sidebar active-sidebar' : 'sidebar'}
         onClick={ShowSidebar}
       >
         <div className="row">

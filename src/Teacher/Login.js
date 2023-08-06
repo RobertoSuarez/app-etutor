@@ -1,32 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   // const { name, email, password } = req.body;
 
   let navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isSignup, setIsSignup] = useState(false);
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState('');
 
-  
-  const IsLogged = localStorage.getItem("IsLogged");
+  const IsLogged = localStorage.getItem('IsLogged');
   console.log(IsLogged);
   function CheckUser() {
-    if (IsLogged == "true") {
-      navigate("/teacher/");
+    if (IsLogged == 'true') {
+      navigate('/teacher/');
     }
   }
 
   const LoginUser = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/api/user/login", {
-      method: "POST",
+    const res = await fetch('http://localhost:5000/api/user/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email,
@@ -39,19 +38,17 @@ const Login = () => {
     });
 
     if (res.status === 404 || !data) {
-      window.alert("Invalid Credentials");
+      window.alert('Invalid Credentials');
     } else {
       setIsSignup(true);
-      localStorage.setItem("userId", userData.user._id);
-      localStorage.setItem("IsLogged", true);
+      localStorage.setItem('userId', userData.user._id);
+      localStorage.setItem('IsLogged', true);
 
-      window.alert("Login Successful");
-      
+      window.alert('Login Successful');
+
       // navigate("/teacher/");
-      window.location.href="/teacher"
+      window.location.href = '/teacher';
     }
-
-   
 
     // console.log(userData);
   };

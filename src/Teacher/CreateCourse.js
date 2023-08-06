@@ -1,28 +1,26 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { FcClock } from "react-icons/fc";
-import { BsBarChartFill } from "react-icons/bs";
-import { BiRupee } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import { IoIosArrowForward } from "react-icons/io";
-import imagePlaceholder from "../placeholder-image.jpg";
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { FcClock } from 'react-icons/fc';
+import { BsBarChartFill } from 'react-icons/bs';
+import { BiRupee } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+import { IoIosArrowForward } from 'react-icons/io';
+import imagePlaceholder from '../placeholder-image.jpg';
 
 const CreateCourse = () => {
   //   title, description, image, user
   let navigate = useNavigate();
-  const teacherId = localStorage.getItem("userId");
+  const teacherId = localStorage.getItem('userId');
   // console.log(teacherId);
 
-
-
   const [course, setCourse] = useState({
-    title: "",
-    description: "",
-    image: "",
-    level: "",
-    time: "",
-    price: "",
-    video: "",
+    title: '',
+    description: '',
+    image: '',
+    level: '',
+    time: '',
+    price: '',
+    video: '',
     user: teacherId,
   });
 
@@ -42,10 +40,10 @@ const CreateCourse = () => {
     const { title, description, image, level, time, price, video, user } =
       course;
 
-    const res = await fetch("http://localhost:5000/api/course/add", {
-      method: "POST",
+    const res = await fetch('http://localhost:5000/api/course/add', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         title,
@@ -61,10 +59,10 @@ const CreateCourse = () => {
     const data = await res.json();
 
     if (data.status === 422 || !data) {
-      window.alert("Signup Failed");
+      window.alert('Signup Failed');
     } else {
-      window.alert("Course Added Successful");
-      navigate("/teacher/courses");
+      window.alert('Course Added Successful');
+      navigate('/teacher/courses');
     }
   };
 

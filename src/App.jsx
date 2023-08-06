@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Compontent import
@@ -18,10 +18,21 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Course from './pages/Course';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppNavBar } from './components/AppNavBar';
+import { useUserAuth } from './context/UserAuthContext';
 
 export const App = () => {
+  const { user } = useUserAuth();
+
+  useEffect(() => {
+    console.log('usuario: ', user);
+  }, []);
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <>
       <AppNavBar />

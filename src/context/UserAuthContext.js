@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -6,9 +6,8 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
-  sendPasswordResetEmail
-} from "firebase/auth";
-import { auth } from "../firebase";
+} from 'firebase/auth';
+import { auth } from '../firebase';
 
 const userAuthContext = createContext();
 
@@ -29,10 +28,10 @@ export function UserAuthContextProvider({ children }) {
     return signInWithPopup(auth, googleAuthProvider);
   }
   function resetPassword(email) {
-    alert('')
+    alert('');
     return auth.sendPasswordResetEmail(email).then((a) => {
-      alert(a)
-    })
+      alert(a);
+    });
   }
 
   useEffect(() => {

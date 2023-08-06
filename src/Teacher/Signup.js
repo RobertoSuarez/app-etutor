@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   // const { name, email, password } = req.body;
-  
+
   let navigate = useNavigate();
 
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
 
   let name, value;
@@ -27,10 +27,10 @@ const Signup = () => {
 
     const { name, email, password } = user;
 
-    const res = await fetch("http://localhost:5000/api/user/signup", {
-      method: "POST",
+    const res = await fetch('http://localhost:5000/api/user/signup', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name,
@@ -40,11 +40,11 @@ const Signup = () => {
     });
     const data = await res.json();
 
-    if(data.status === 400 || !data ) {
-      window.alert("Signup Failed");
+    if (data.status === 400 || !data) {
+      window.alert('Signup Failed');
     } else {
-      window.alert("Signup Successful");
-      navigate("/teacher/login");
+      window.alert('Signup Successful');
+      navigate('/teacher/login');
     }
   };
 
