@@ -6,12 +6,27 @@ import { useState } from 'react';
 // al input que nos pasaran
 export const useSearchPage = (input = '') => {
   const appPages = [
-    'Cerrar sesión',
-    'Configuraciones',
-    'Home',
-    'Todos los cursos',
-    'Mis avances',
-    'Contactos',
+    {
+      label: 'Cerrar sesión',
+      url: '/login',
+    },
+    {
+      label: 'Configuraciones',
+      url: '/courses',
+    },
+    {
+      label: 'Home',
+      url: '/',
+    },
+    {
+      label: 'Todos los cursos',
+      url: '/courses',
+    },
+
+    {
+      label: 'Mis avances',
+      url: '/contact',
+    },
   ];
 
   const [pages, setPages] = useState([]);
@@ -19,7 +34,7 @@ export const useSearchPage = (input = '') => {
   const searchPages = () => {
     const result = appPages.filter((p) => {
       if (input === '') return false;
-      return p.includes(input);
+      return p.label.includes(input);
     });
 
     return result;

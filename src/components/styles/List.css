@@ -1,64 +1,100 @@
-
 .list-title {
-    font-size: 1rem;
-    font-weight: normal;
-    color: black;
+  font-size: 1rem;
+  font-weight: normal;
+  color: black;
 }
 
 .list-error {
-    width: 100%;
-    height: 7rem;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 5rem;
-    text-align: center;
+  width: 100%;
+  height: 7rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 5rem;
+  text-align: center;
 }
 
 .box-search {
-    display: flex;
-    flex-direction: column;
-    width: 700px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
 }
 
 .box-search:hover {
-    .container-opciones {
-        display: block;
-        position: absolute;
-        top: 70px;
-    }
+  .container-opciones {
+    display: block;
+    position: absolute;
+    top: 70px;
+  }
 }
 
 .container-opciones {
-    width: 700px;
-    color: black;
-    display: none;
+  width: 500px;
+  color: black;
+  display: none;
 }
 
 .input-search {
-    width: 500px;
+  width: 500px;
 }
 
 .list-error-text {
-    font-size: 1rem;
-    font-weight: bold;
-    color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
 }
 
-
 .box-cargando {
-    background-color: white;
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: white;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .box-resultados {
-    background-color: white;
-    width: 100%;
-    padding: 1rem 2rem;
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow: hidden;
+}
+
+.historial-items {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.historial-items:hover {
+  background-color: #ececec;
+}
+
+.historial-icon-reload {
+  color: #79797a;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.historial-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.course-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.curso-title {
+  font-size: 1rem;
+}
+
+.curso-subtitle {
+  font-size: 0.8rem;
 }

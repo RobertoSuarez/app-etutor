@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../components/styles/Card.css';
 import { FcClock } from 'react-icons/fc';
 import { BsBarChartFill } from 'react-icons/bs';
@@ -10,7 +10,7 @@ import useCourses from '../hooks/useCourses';
 import { Button } from '@mui/material';
 
 export default function Courses() {
-  const { courses, isLoading, error } = useCourses();
+  const { courses, isLoading } = useCourses();
 
   useEffect(() => {
     console.log(courses);
@@ -35,7 +35,7 @@ export default function Courses() {
 
       <div className="course-grid">
         {courses &&
-          courses.courses.map((item) => (
+          courses.map((item) => (
             <div className="card" key={item._id}>
               <img
                 src={item.image || imagePlaceholder}

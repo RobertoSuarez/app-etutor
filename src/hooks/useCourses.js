@@ -3,7 +3,7 @@ import { BASE_URL } from '../config';
 import { useEffect } from 'react';
 
 export default function useCourses(input) {
-  const [courses, setCourses] = useState(null);
+  const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -13,7 +13,8 @@ export default function useCourses(input) {
     try {
       const response = await fetch(`${BASE_URL}/api/course`);
       const data = await response.json();
-      setCourses(data);
+      // console.log(data.courses);
+      setCourses(data.courses);
       setIsLoading(false);
       setError(null);
     } catch (error) {

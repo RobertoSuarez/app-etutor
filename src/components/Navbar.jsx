@@ -1,22 +1,12 @@
 import { Link } from 'react-router-dom';
-import { React, useState } from 'react';
+import { React, useRef, useState } from 'react';
 import { IoMdCart } from 'react-icons/io';
 import { MdNotifications } from 'react-icons/md';
-import TextField from '@mui/material/TextField';
-import { List } from './List';
-import { Box, Modal, Typography } from '@mui/material';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  backgroundColor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  padding: '1rem',
-};
+import './styles/NavBar.css';
+import { List } from './List';
 
 export default function Navbar() {
   const Links = [
@@ -24,22 +14,54 @@ export default function Navbar() {
     { title: <IoMdCart />, path: '/cart' },
   ];
 
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   const [notification, setNotification] = useState(false);
 
   const showNotification = () => setNotification(!notification);
 
   const [inputText, setInputText] = useState('');
 
+  const [isHovered, setIsHovered] = useState(false);
+
   // eslint-disable-next-line no-unused-vars
-  const inputHandler = (e) => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const inputTextRef = useRef(null);
+
+  const onInputHandler = (e) => {
     //convert input text to lower case
     // var lowerCase = e.target.value.toLowerCase();
     setInputText(e.target.value);
+  };
+
+  const onInputFocus = () => {
+    setIsFocused(true);
+    setOpen(true);
+  };
+
+  const onInputBlur = () => {
+    setIsFocused(false);
+    setTimeout(() => {
+      setOpen(false);
+    }, 200);
+  };
+
+  const onHandleEnter = () => {
+    setIsHovered(true);
+  };
+
+  const onHandleLeave = () => {
+    setIsHovered(false);
+  };
+
+  const onClearInput = () => {
+    setInputText('');
+    inputTextRef.current.focus();
   };
 
   return (
@@ -57,53 +79,40 @@ export default function Navbar() {
         <li>Course starting from ₹299 only</li>
       </div>
 
-      <div className="box-search">
-        <TextField
-          id="outlined-basic"
-          onClick={handleOpen}
-          // onChange={inputHandler}
-          // value={inputText}
-          color="secondary"
-          autoComplete={false}
-          variant="outlined"
-          fullWidth
-          className="input-search"
-          label="Buscar"
+      <div
+        className="box-search-form position-relative "
+        onMouseEnter={onHandleEnter}
+        onMouseLeave={onHandleLeave}
+      >
+        <SearchOutlinedIcon
+          style={{ fontWeight: 'lighter', color: '#79797a' }}
+        />
+        <input
+          type="text"
+          ref={inputTextRef}
+          className="box-search-input"
+          placeholder="Pregúntame cualquier cosa"
+          value={inputText}
+          onChange={onInputHandler}
+          onFocus={onInputFocus}
+          onBlur={onInputBlur}
         />
 
-        <div className="container-opciones">
-          <List input={inputText} />
+        <div style={{ width: '24px' }}>
+          <CloseOutlinedIcon
+            onClick={onClearInput}
+            className="box-icon-close"
+            style={{ display: isHovered && inputText ? 'block' : 'none' }}
+          />
+        </div>
+
+        <div
+          className="position-absolute top-100 start-0 box-contenedor-resultados"
+          style={{ display: open ? 'block' : 'none' }}
+        >
+          <List input={inputText} handleClose={handleClose} />
         </div>
       </div>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box style={style}>
-          <Typography variant="h6">Texto en el modal</Typography>
-          <Typography>mucho texot xD</Typography>
-        </Box>
-      </Modal>
-
-      {/* <div className="search-box">
-          <div className="search">
-            <div className="text-r">Hola,</div>
-              <TextField
-                id="outlined-basic"
-                onChange={inputHandler}
-                value={inputText}
-                autoComplete={false}
-                variant="outlined"
-                fullWidth
-                label="Search"
-              />
-          </div>
-          
-          <List input={inputText} id="list-box" />
-      </div> */}
 
       <ul className="nav-link">
         {Links.map((item, index) => {

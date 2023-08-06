@@ -19,7 +19,6 @@ import Signup from './components/Signup';
 import Course from './pages/Course';
 
 import React, { useEffect } from 'react';
-import { AppNavBar } from './components/AppNavBar';
 import { useUserAuth } from './context/UserAuthContext';
 
 export const App = () => {
@@ -35,7 +34,6 @@ export const App = () => {
 
   return (
     <>
-      <AppNavBar />
       <div className="app-wrap">
         <Navbar />
 
