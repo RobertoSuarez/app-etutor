@@ -19,12 +19,10 @@ import Signup from './components/Signup';
 import Course from './pages/Course';
 
 import React from 'react';
-import { AppNavBar } from './components/AppNavBar';
 
 export const App = () => {
   return (
     <>
-      <AppNavBar />
       <div className="app-wrap">
         <Navbar />
 
