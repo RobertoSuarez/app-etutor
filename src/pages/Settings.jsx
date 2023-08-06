@@ -1,10 +1,11 @@
-export default function Settings() {
+import React from 'react';
 
-    return (
-      <>
+export const Settings = () => {
+  return (
+    <>
       <div className="page p-2">
         <h2>Account Settings</h2>
       </div>
-      </>
-    );
-  }
+    </>
+  );
+};

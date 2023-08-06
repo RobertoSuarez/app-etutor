@@ -23,7 +23,9 @@ function Course() {
           items: json,
           DataisLoaded: true,
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchData();

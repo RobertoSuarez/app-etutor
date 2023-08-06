@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { BsLinkedin } from 'react-icons/bs';
 import { AiFillGithub } from 'react-icons/ai';
 
-export default function Footer() {
-  const Links = [];
+import React from 'react';
 
+export const Footer = () => {
   return (
     <div className="footer">
       <div className="left">
@@ -28,4 +28,4 @@ export default function Footer() {
       </div>
     </div>
   );
-}
+};

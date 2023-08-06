@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FcClock } from 'react-icons/fc';
 import { BsBarChartFill } from 'react-icons/bs';
 import { BiRupee } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
 import imagePlaceholder from '../placeholder-image.jpg';
 

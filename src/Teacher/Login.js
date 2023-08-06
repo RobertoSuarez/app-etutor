@@ -8,11 +8,13 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [isSignup, setIsSignup] = useState(false);
   const [userData, setUserData] = useState('');
 
   const IsLogged = localStorage.getItem('IsLogged');
   console.log(IsLogged);
+  // eslint-disable-next-line no-unused-vars
   function CheckUser() {
     if (IsLogged == 'true') {
       navigate('/teacher/');

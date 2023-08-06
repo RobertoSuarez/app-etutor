@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { FcClock } from "react-icons/fc";
-import { BsBarChartFill } from "react-icons/bs";
-import { BiRupee } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import { IoIosArrowForward } from "react-icons/io";
-import imagePlaceholder from "../placeholder-image.jpg";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { FcClock } from 'react-icons/fc';
+import { BsBarChartFill } from 'react-icons/bs';
+import { BiRupee } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+import { IoIosArrowForward } from 'react-icons/io';
+import imagePlaceholder from '../placeholder-image.jpg';
 
 const UpdateCourse = () => {
   const { id } = useParams();
@@ -13,13 +13,13 @@ const UpdateCourse = () => {
   let navigate = useNavigate();
 
   const [course, setCourse] = useState({
-    title: "",
-    description: "",
-    image: "",
-    level: "",
-    time: "",
-    price: "",
-    video: "",
+    title: '',
+    description: '',
+    image: '',
+    level: '',
+    time: '',
+    price: '',
+    video: '',
   });
 
   let name, value;
@@ -48,7 +48,9 @@ const UpdateCourse = () => {
           price: json.course.price,
           video: json.course.video,
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchData();
@@ -60,9 +62,9 @@ const UpdateCourse = () => {
     const { title, description, image, level, time, price, video } = course;
 
     const res = await fetch(`http://localhost:5000/api/course/update/${id}`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         title,
@@ -77,27 +79,28 @@ const UpdateCourse = () => {
     const data = await res.json();
 
     if (data.status === 422 || !data) {
-      window.alert("Failed to Update Course");
+      window.alert('Failed to Update Course');
     } else {
-      window.alert("Course Added Successful");
-      navigate("/teacher/courses");
+      window.alert('Course Added Successful');
+      navigate('/teacher/courses');
     }
   };
 
   const deleteData = async () => {
+    // eslint-disable-next-line no-unused-vars
     const res = await fetch(`http://localhost:5000/api/course/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
-    window.alert("Course Deleted");
-    navigate("/teacher/courses");
+    window.alert('Course Deleted');
+    navigate('/teacher/courses');
   };
 
   const cancel = () => {
-    navigate("/teacher/courses");
+    navigate('/teacher/courses');
   };
 
   return (
@@ -157,7 +160,6 @@ const UpdateCourse = () => {
             ></iframe>
           </div>
         </div>
-
 
         <br />
         <form method="POST" className="course-form">

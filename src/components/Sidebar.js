@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { useNavigate } from 'react-router';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useState } from 'react';
 import ProfileImage from '../avatar.png';

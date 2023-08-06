@@ -1,16 +1,7 @@
-import "../components/styles/Card.css";
-import { FcClock } from "react-icons/fc";
-import { BsBarChartFill } from "react-icons/bs";
-import { BiRupee } from "react-icons/bi";
-import { MdOutlineArrowForwardIos, MdDeleteForever } from "react-icons/md";
-import { TiStarHalfOutline, TiStarFullOutline } from "react-icons/ti";
-import { Link } from "react-router-dom";
-import { IoIosArrowForward } from "react-icons/io";
-import { RiEdit2Fill } from "react-icons/ri";
-import { useParams, useNavigate } from "react-router-dom";
-import imagePlaceholder from "../placeholder-image.jpg";
-
-import React, { useEffect, useState } from "react";
+import '../components/styles/Card.css';
+import { Link } from 'react-router-dom';
+import { RiEdit2Fill } from 'react-icons/ri';
+import React, { useEffect, useState } from 'react';
 
 // class Course extends React.Component {
 //   // Constructor
@@ -83,8 +74,8 @@ import React, { useEffect, useState } from "react";
 //   }
 // }
 
-const teacherId = localStorage.getItem("userId");
-  // console.log(teacherId);
+const teacherId = localStorage.getItem('userId');
+// console.log(teacherId);
 
 function Courses() {
   const [course, setCourse] = useState({
@@ -108,13 +99,14 @@ function Courses() {
           items: json,
           DataisLoaded: true,
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchData();
   }, []);
 
-  
   const DataisLoaded = course.DataisLoaded;
 
   if (!DataisLoaded)
@@ -131,15 +123,15 @@ function Courses() {
   return (
     <div className="page">
       <br />
-      <h1 className="flex"> All Courses Created by You </h1>{" "}
+      <h1 className="flex"> All Courses Created by You </h1>{' '}
       <div className="course-grid-4">
         {course.items.courses.courses.map((item) => (
           <div className="card" key={item._id}>
-            <img src={item.image || imagePlaceholder}  alt={item.title} className="card-img" />
+            <img src={item.image} alt={item.title} className="card-img" />
             <div className="card-content">
               <div className="card-row">
                 <div className="course-title">
-                  {item.title.slice(0, 20) + "  ..."}
+                  {item.title.slice(0, 20) + '  ...'}
                 </div>
                 <div className="edit">
                   <Link to={`/teacher/courses/update/${item._id}`}>

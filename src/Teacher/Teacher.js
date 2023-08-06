@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
+import { Navbar } from './components/Navbar';
 import CreateCourse from './CreateCourse';
-import Home from './Home';
-import Courses from './Courses';
+import { Home } from './Home';
 import Signup from './Signup';
 import Login from './Login';
 import UpdateCourse from './Udate';
+import Courses from './Courses';
 
 export default function Teacher() {
   return (

@@ -1,4 +1,6 @@
-export default function Cart() {
+import React from 'react';
+
+export const Cart = () => {
   return (
     <>
       <div className="page p-2">
@@ -6,4 +8,4 @@ export default function Cart() {
       </div>
     </>
   );
-}
+};

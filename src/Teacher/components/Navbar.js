@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 
-export default function Navbar() {
+import React from 'react';
+
+export const Navbar = () => {
   const IsLogged = localStorage.getItem('IsLogged');
   function CheckUser() {
     if (IsLogged == 'true') {
@@ -50,4 +52,4 @@ export default function Navbar() {
       </ul>
     </div>
   );
-}
+};

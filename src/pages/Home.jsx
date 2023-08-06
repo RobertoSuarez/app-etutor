@@ -2,7 +2,7 @@ import { React } from 'react';
 import { Link } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import Typewriter from 'typewriter-effect';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 import { Button } from '@mui/material';
 
 export default function Home() {
