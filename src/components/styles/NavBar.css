@@ -29,6 +29,7 @@
 
 .box-icon-close {
   color: #79797a;
+  cursor: pointer;
 }
 
 .box-contenedor-resultados {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { BASE_URL } from '../config';
 
 function Course() {
   const [course, setCourse] = useState({
@@ -13,7 +14,7 @@ function Course() {
   const { id } = useParams();
 
   useEffect(() => {
-    const url = `http://localhost:5000/api/course/${id}`;
+    const url = `${BASE_URL}/api/course/${id}`;
 
     const fetchData = async () => {
       try {

@@ -64,6 +64,14 @@ export default function Navbar() {
     inputTextRef.current.focus();
   };
 
+  const onKey = (e) => {
+    // key Esc
+    if (e.keyCode == 27) {
+      handleClose();
+      inputTextRef.current.blur();
+    }
+  };
+
   return (
     <div className="navbar">
       <Link to="/">
@@ -90,12 +98,14 @@ export default function Navbar() {
         <input
           type="text"
           ref={inputTextRef}
+          id="inputbusqueda"
           className="box-search-input"
-          placeholder="Pregúntame cualquier cosa"
+          placeholder="Busca cursos, paginas. Por ejemplo 'Curso de React.js'"
           value={inputText}
           onChange={onInputHandler}
           onFocus={onInputFocus}
           onBlur={onInputBlur}
+          onKeyDown={onKey}
         />
 
         <div style={{ width: '24px' }}>

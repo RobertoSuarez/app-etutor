@@ -2,6 +2,7 @@ import '../components/styles/Card.css';
 import { Link } from 'react-router-dom';
 import { RiEdit2Fill } from 'react-icons/ri';
 import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../config';
 
 // class Course extends React.Component {
 //   // Constructor
@@ -89,7 +90,7 @@ function Courses() {
   // const { id } = useParams();
 
   useEffect(() => {
-    const url = `http://localhost:5000/api/course/user/${teacherId}`;
+    const url = `${BASE_URL}/api/course/user/${teacherId}`;
 
     const fetchData = async () => {
       try {
