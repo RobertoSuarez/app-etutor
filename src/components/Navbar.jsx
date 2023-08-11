@@ -99,6 +99,7 @@ export default function Navbar() {
           type="text"
           ref={inputTextRef}
           id="inputbusqueda"
+          autoComplete="off"
           className="box-search-input"
           placeholder="Busca cursos, paginas. Por ejemplo 'Curso de React.js'"
           value={inputText}

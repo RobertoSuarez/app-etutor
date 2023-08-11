@@ -5,6 +5,7 @@ import { BsBarChartFill } from 'react-icons/bs';
 import { BiRupee } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
 import imagePlaceholder from '../placeholder-image.jpg';
+import { BASE_URL } from '../config';
 
 const CreateCourse = () => {
   //   title, description, image, user
@@ -39,7 +40,7 @@ const CreateCourse = () => {
     const { title, description, image, level, time, price, video, user } =
       course;
 
-    const res = await fetch('http://localhost:5000/api/course/add', {
+    const res = await fetch(`${BASE_URL}/api/course/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ function Course() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const DataisLoaded = course.DataisLoaded;
 

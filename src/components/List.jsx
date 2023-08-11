@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import RotateLeftOutlinedIcon from '@mui/icons-material/RotateLeftOutlined';
 import useCourses from '../hooks/useCourses';
 import { useSearchPage } from '../hooks/useSearchPage';
-import './styles/List.css';
 import { useHistorial } from '../hooks/useHistorial';
 import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
-import OndemandVideoOutlinedIcon from '@mui/icons-material/OndemandVideoOutlined';
-import { useEffect } from 'react';
+
+import './styles/List.css';
+import { ListItemCourse } from './ListItemCourse';
 
 /*
   Ideas que me gustarian que esten en la lista de opciones
@@ -42,12 +42,6 @@ export const List = ({ input = '', handleClose }) => {
     navigate(page.url);
   };
 
-  useEffect(() => {
-    if (courses) {
-      console.log('curso: ', courses);
-    }
-  }, [courses]);
-
   if (isLoading) {
     return (
       <div className="box-cargando">
@@ -72,19 +66,12 @@ export const List = ({ input = '', handleClose }) => {
       {courses
         ? courses.map((c) => {
             return (
-              <div
+              <ListItemCourse
                 key={c._id}
                 className="historial-items"
-                onClick={() => {
-                  onHandleCourse(c);
-                }}
-              >
-                <OndemandVideoOutlinedIcon className="historial-icon-reload" />
-                <div className="course-text">
-                  <div className="curso-title">{c.title}</div>
-                  <div className="curso-subtitle">Curso</div>
-                </div>
-              </div>
+                course={c}
+                handleClose={handleClose}
+              />
             );
           })
         : ''}
