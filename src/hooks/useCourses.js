@@ -13,10 +13,12 @@ export default function useCourses(input) {
     try {
       const response = await fetch(`${BASE_URL}/api/course`);
       const data = await response.json();
-      // console.log(data.courses);
+
       let { courses } = data;
       // filtramos los cursos desde el cliente
-      courses = courses.filter((curso) => curso.title.includes(input));
+      if (input)
+        courses = courses.filter((curso) => curso.title.includes(input));
+
       setCourses(courses);
       setIsLoading(false);
       setError(null);

@@ -10,7 +10,7 @@ import useCourses from '../hooks/useCourses';
 import { Button } from '@mui/material';
 
 export default function Courses() {
-  const { courses, isLoading } = useCourses();
+  const { courses, isLoading } = useCourses('');
 
   useEffect(() => {
     console.log(courses);
