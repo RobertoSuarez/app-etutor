@@ -45,7 +45,7 @@ export const CourseCard = ({ item }) => {
             {item.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {item.description.slice(0, 100) + '...'}
+            {item.description.slice(0, 125) + '...'}
           </Typography>
         </CardContent>
         <CardActions>

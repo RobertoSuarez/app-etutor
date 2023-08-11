@@ -8,6 +8,7 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from './Theme';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import Login from './components/Login';
+import Signup from './components/Signup';
 
 // eslint-disable-next-line react/no-deprecated
 ReactDOM.render(
@@ -17,6 +18,7 @@ ReactDOM.render(
         <Router>
           <Routes>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<Signup />} />
             <Route path="/*" element={<App />} />
             <Route path="/teacher/*" element={<Teacher />} />
           </Routes>
