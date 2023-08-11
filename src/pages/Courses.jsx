@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
 import imagePlaceholder from '../placeholder-image.jpg';
 import useCourses from '../hooks/useCourses';
-import { Button } from '@mui/material';
 
 export default function Courses() {
   const { courses, isLoading } = useCourses('');
@@ -31,7 +30,7 @@ export default function Courses() {
   return (
     <div className="page">
       <br />
-      <h1 className="flex"> All Courses </h1>
+      <h1 className="flex"> Todos los cursos </h1>
 
       <div className="course-grid">
         {courses &&
@@ -44,14 +43,10 @@ export default function Courses() {
               />
               <div className="card-content">
                 <div className="card-row">
-                  <div className="course-title">
-                    {item.title.slice(0, 25) + '  ...'}
-                  </div>
+                  <div className="course-title">{item.title}</div>
                 </div>
                 <div className="card-row">
-                  <div className="discription">
-                    {item.description.slice(0, 70) + '  ...'}
-                  </div>
+                  <div className="discription">{item.description}</div>
                 </div>
                 <div className="card-row"></div>
                 <div className="card-row">
@@ -61,7 +56,7 @@ export default function Courses() {
                   </div>
                   <div className="time">
                     <FcClock />
-                    {item.time} Hours
+                    {item.time} Horas
                   </div>
                 </div>
                 <div className="card-row">
@@ -71,7 +66,7 @@ export default function Courses() {
                   </div>
                   <div className="rating">
                     <Link to={`/learning/${item._id}`}>
-                      View <IoIosArrowForward />
+                      Ver <IoIosArrowForward />
                     </Link>
                   </div>
                 </div>
@@ -79,8 +74,6 @@ export default function Courses() {
             </div>
           ))}
       </div>
-
-      <Button variant="contained">Hola, mundo</Button>
     </div>
   );
 }

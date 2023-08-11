@@ -130,7 +130,7 @@ export function AppNavBar() {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
+          aria-label="Mostrar 17 nuevas notificaciones"
           color="inherit"
         >
           <Badge badgeContent={17} color="error">
@@ -180,7 +180,7 @@ export function AppNavBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Buscar…"
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
@@ -188,7 +188,7 @@ export function AppNavBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
+              aria-label="Mostrar 4 correos nuevos"
               color="inherit"
             >
               <Badge badgeContent={4} color="error">
@@ -197,7 +197,7 @@ export function AppNavBar() {
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="Mostrar 17 nuevas notificaciones"
               color="inherit"
             >
               <Badge badgeContent={17} color="error">
@@ -207,7 +207,7 @@ export function AppNavBar() {
             <IconButton
               size="large"
               edge="end"
-              aria-label="account of current user"
+              aria-label="Cuenta del usuario actual"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
@@ -219,7 +219,7 @@ export function AppNavBar() {
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="show more"
+              aria-label="Mostrar más"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}

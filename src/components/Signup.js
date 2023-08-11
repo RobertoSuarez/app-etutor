@@ -19,6 +19,8 @@ const Signup = () => {
       navigate('/login');
     } catch (err) {
       setError(err.message);
+      //console.log('Mensaje de depuración');
+      //navigate('/signup');
     }
   };
 
