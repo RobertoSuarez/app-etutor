@@ -83,8 +83,8 @@ export default function Navbar() {
           notification ? 'notification notification-active' : 'notification'
         }
       >
-        <li>Welcome to e-Learn</li>
-        <li>Course starting from ₹299 only</li>
+        <li>Bienvenido a e-Learn</li>
+        <li>Curso desde solo ₹ 299</li>
       </div>
 
       <div

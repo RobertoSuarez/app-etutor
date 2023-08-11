@@ -30,37 +30,37 @@ export default function Sidebar() {
 
   const Links = [
     {
-      title: 'Home',
+      title: 'Inicio',
       icon: <AiFillHome />,
       path: '/',
     },
     {
-      title: 'All Courses',
+      title: 'Todos los cursos',
       icon: <ImBooks />,
       path: '/courses',
     },
     {
-      title: 'My Learning',
+      title: 'Mi aprendizaje',
       icon: <FaBookReader />,
       path: '/learning',
     },
     {
-      title: 'My Cart',
+      title: 'Mi carrito',
       icon: <IoMdCart />,
       path: '/cart',
     },
     {
-      title: 'Account Settings',
+      title: 'Configuraciones de la cuenta',
       icon: <RiUserSettingsFill />,
       path: '/settings',
     },
     {
-      title: 'Contact Us',
+      title: 'Contacta con nosotros',
       icon: <RiMessage2Fill />,
       path: '/contact',
     },
     {
-      title: 'About Us',
+      title: 'Sobre nosotros',
       icon: <RiInformationFill />,
       path: '/about',
     },

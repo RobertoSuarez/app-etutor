@@ -80,14 +80,14 @@ function Course() {
           <iframe
             width="560"
             src={`https://www.youtube.com/embed/${course.items.course.video}`}
-            title="YouTube video player"
+            title="Reproductor de videos de youtube"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="video"
           ></iframe>
 
-          <h3>About The Course</h3>
+          <h3>Sobre el Curso</h3>
           <div className="course-description">
             {course.items.course.description}
           </div>
@@ -95,14 +95,14 @@ function Course() {
           {/* {console.log(teacher.items[0])} */}
           {/* <h3>Other Courses by</h3> */}
           {/* {course.teacher.} */}
-          <h3>Comments / Questions</h3>
-          <p>No Comments</p>
+          <h3>Comentarios / Preguntas</h3>
+          <p>No hay Comentarios</p>
         </div>
         <div>
-          <h3>Course Details</h3>
-          <span>Course Level: {course.items.course.level}</span>
+          <h3>Detalles del curso</h3>
+          <span>Nivel del curso: {course.items.course.level}</span>
           <br />
-          <span>Course Duration: {course.items.course.time}</span>
+          <span>Duración del curso: {course.items.course.time}</span>
         </div>
         <br />
       </div>

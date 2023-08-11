@@ -16,21 +16,21 @@ export default function Home() {
   return (
     <div className="home page">
       <div className="hero">
-        <h1 className="banner-heading1">Start Learning From </h1>
+        <h1 className="banner-heading1">Empezar a aprender desde </h1>
         <Button color="primary" variant="contained">
           Hola, mundo
         </Button>
-        <span className="banner-heading2">The Worlds Best Teachers</span>
+        <span className="banner-heading2">Los mejores maestros del mundo</span>
 
         <div className="content">
           <p>
-            Start, switch, or advance your career with more than 5,000 courses,
-            Professional Certificates, and degrees from world-class universities
-            and companies.
+            Comience, cambie o avance en su carrera con más de 5,000 cursos,
+            Certificados profesionales y títulos de universidades de clase
+            mundial y empresas.
           </p>
           <Typewriter
             options={{
-              strings: ['Learn From Anywhere', 'Learn Without Limits'],
+              strings: ['Aprende desde cualquier lugar', 'Aprende Sin Límites'],
               autoStart: true,
               loop: true,
             }}
@@ -39,16 +39,16 @@ export default function Home() {
             {CheckUser(user) ? (
               <div>
                 <Link to="/courses" className="link-1">
-                  Explore all courses
+                  Explora todos los cursos
                 </Link>
               </div>
             ) : (
               <div>
                 <Link to="/login" className="btn">
-                  Login
+                  Iniciar sesión
                 </Link>
                 <Link to="/teacher/" className="btn">
-                  Teach
+                  Enseñar
                 </Link>
               </div>
             )}

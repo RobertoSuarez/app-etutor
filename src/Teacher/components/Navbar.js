@@ -21,31 +21,31 @@ export const Navbar = () => {
       </Link>
       <ul className="nav-link">
         <li>
-          <Link to="/teacher">Home</Link>
+          <Link to="/teacher">Inicio</Link>
         </li>
         <li>
-          <Link to="/">Student</Link>
+          <Link to="/">Estudiante</Link>
         </li>
 
         {CheckUser() ? (
           <>
             <li>
-              <Link to="/teacher/courses">Courses</Link>
+              <Link to="/teacher/courses">Cursos</Link>
             </li>
             <li>
-              <Link to="/teacher/courses/add">Add Course</Link>
+              <Link to="/teacher/courses/add">Agregar curso</Link>
             </li>
             <li onClick={LogOut} className="pointer">
-              Logout
+              Cerrar sesión
             </li>
           </>
         ) : (
           <>
             <li>
-              <Link to="/teacher/login">Login</Link>
+              <Link to="/teacher/login">Iniciar sesión</Link>
             </li>
             <li>
-              <Link to="/teacher/signup">Signup</Link>
+              <Link to="/teacher/signup">Registrarse</Link>
             </li>
           </>
         )}

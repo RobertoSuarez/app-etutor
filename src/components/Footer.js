@@ -12,7 +12,7 @@ export const Footer = () => {
         &copy; 2022
       </div>
       <div className="middle">
-        <span>Created and Designed by</span>
+        <span>Creado y diseñado por</span>
         <span>Dilkhush Raj</span>
         <span>
           <a href="https://linkedin.com/in/dilkhushraj">
@@ -24,7 +24,7 @@ export const Footer = () => {
         </span>
       </div>
       <div className="right">
-        <Link to="/teacher">Become Teacher on e-Learn</Link>
+        <Link to="/teacher">Conviértete en profesor en e-Learn</Link>
       </div>
     </div>
   );

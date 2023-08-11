@@ -27,13 +27,13 @@ const Signup = () => {
   return (
     <>
       <div className="p-4 box">
-        <h2 className="mb-3">Student Signup</h2>
+        <h2 className="mb-3">Registro de estudiantes</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="email"
-              placeholder="Email address"
+              placeholder="Dirección de correo electrónico"
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
@@ -41,20 +41,20 @@ const Signup = () => {
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 
           <div className="d-grid gap-2">
             <Button variant="primary" type="Submit">
-              Sign up
+              Registrarse
             </Button>
           </div>
         </Form>
       </div>
       <div className="p-4 box mt-3 text-center">
-        Already have an account? <Link to="/login">Log In</Link>
+        ¿Ya tienes una cuenta? <Link to="/login">Iniciar sesión</Link>
       </div>
     </>
   );

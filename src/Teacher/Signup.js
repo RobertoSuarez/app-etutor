@@ -41,9 +41,9 @@ const Signup = () => {
     const data = await res.json();
 
     if (data.status === 400 || !data) {
-      window.alert('Signup Failed');
+      window.alert('Registro fallido');
     } else {
-      window.alert('Signup Successful');
+      window.alert('Registro exitoso');
       navigate('/teacher/login');
     }
   };
@@ -53,7 +53,7 @@ const Signup = () => {
       <section className="create-course">
         <form method="POST" className="course-form">
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Nombre</label>
             <input
               type="text"
               name="name"
@@ -61,12 +61,12 @@ const Signup = () => {
               autoComplete="off"
               value={user.name}
               onChange={handleInputs}
-              placeholder="Enter Name"
+              placeholder="Ingresar nombre"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
               name="email"
@@ -74,12 +74,12 @@ const Signup = () => {
               autoComplete="off"
               value={user.email}
               onChange={handleInputs}
-              placeholder="Enter Email"
+              placeholder="Ingresar correo electrónico"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Contraseña</label>
             <input
               type="password"
               name="password"
@@ -87,7 +87,7 @@ const Signup = () => {
               autoComplete="off"
               value={user.password}
               onChange={handleInputs}
-              placeholder="Enter Password"
+              placeholder="Ingresar contraseña"
             />
           </div>
 

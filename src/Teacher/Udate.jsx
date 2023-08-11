@@ -79,9 +79,9 @@ const UpdateCourse = () => {
     const data = await res.json();
 
     if (data.status === 422 || !data) {
-      window.alert('Failed to Update Course');
+      window.alert('Error al actualizar el curso');
     } else {
-      window.alert('Course Added Successful');
+      window.alert('Curso agregado exitoso');
       navigate('/teacher/courses');
     }
   };
@@ -95,7 +95,7 @@ const UpdateCourse = () => {
       },
     });
 
-    window.alert('Course Deleted');
+    window.alert('Curso eliminado');
     navigate('/teacher/courses');
   };
 
@@ -107,12 +107,12 @@ const UpdateCourse = () => {
     <>
       <section className="create-course">
         <h2>
-          Update <b> {course.title} </b> Course
+          Actualizar <b> {course.title} </b> Curso
         </h2>
         <br />
         <div className="flex-p">
           <div className="card update-preview">
-            <div className="preview-tag">Preview</div>
+            <div className="preview-tag">Avance</div>
             <img
               src={course.image || imagePlaceholder}
               alt={course.title}
@@ -133,7 +133,7 @@ const UpdateCourse = () => {
                 </div>
                 <div className="time">
                   <FcClock />
-                  {course.time} Hours
+                  {course.time} Horas
                 </div>
               </div>
               <div className="card-row">
@@ -143,17 +143,17 @@ const UpdateCourse = () => {
                 </div>
                 <div className="rating">
                   <Link to={`/learning/${course._id}`}>
-                    View <IoIosArrowForward />
+                    Ver <IoIosArrowForward />
                   </Link>
                 </div>
               </div>
             </div>
           </div>
           <div className="card update-preview">
-            <div className="preview-tag">Preview</div>
+            <div className="preview-tag">Avance</div>
             <iframe
               src={`https://www.youtube.com/embed/${course.video}`}
-              title="YouTube video player"
+              title="Reproductor de videos de youtube"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -164,7 +164,7 @@ const UpdateCourse = () => {
         <br />
         <form method="POST" className="course-form">
           <div className="form-group">
-            <label htmlFor="name">Course Title</label>
+            <label htmlFor="name">Título del curso</label>
             <input
               type="text"
               name="title"
@@ -172,12 +172,14 @@ const UpdateCourse = () => {
               autoComplete="off"
               value={course.title}
               onChange={handleInputs}
-              placeholder="Web Development Bootcamp"
+              placeholder="Bootcamp de desarrollo web"
               required="required"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="image">Course Thumbnail Image URL</label>
+            <label htmlFor="image">
+              URL de la imagen en miniatura del curso
+            </label>
             <input
               type="url"
               name="image"
@@ -185,13 +187,13 @@ const UpdateCourse = () => {
               autoComplete="off"
               value={course.image}
               onChange={handleInputs}
-              placeholder="Enter Image URL"
+              placeholder="Ingrese la URL de la imagen"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Course Description</label>
+            <label htmlFor="description">Descripción del curso</label>
             <textarea
               type="text"
               name="description"
@@ -199,30 +201,30 @@ const UpdateCourse = () => {
               autoComplete="off"
               value={course.description}
               onChange={handleInputs}
-              placeholder="About Course"
+              placeholder="Acerca del curso"
               required="required"
             />
           </div>
           <div className="form-group form-group-select">
-            <label htmlFor="level">Select Course Level</label>
+            <label htmlFor="level">Seleccione el nivel del curso</label>
             <select value={course.level} onChange={handleInputs} name="level">
               <option className="option" value="none" selected hidden>
-                Select an Option
+                Seleccione una opción
               </option>
               <option className="option" value="Beginner">
-                Beginner
+                Principiante
               </option>
               <option className="option" value="Intermediate">
-                Intermediate
+                Intermedio
               </option>
               <option className="option" value="Advanced">
-                Advanced
+                Avanzado
               </option>
             </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="time">Course Duration</label>
+            <label htmlFor="time">Duración del curso</label>
             <input
               type="number"
               name="time"
@@ -230,12 +232,12 @@ const UpdateCourse = () => {
               autoComplete="off"
               value={course.time}
               onChange={handleInputs}
-              placeholder="Enter Course Duration in hours"
+              placeholder="Ingrese la duración del curso en horas"
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="price">Set Course Price</label>
+            <label htmlFor="price">Establecer precio del curso</label>
             <input
               type="number"
               name="price"
@@ -243,13 +245,13 @@ const UpdateCourse = () => {
               autoComplete="off"
               value={course.price}
               onChange={handleInputs}
-              placeholder="Enter Ammount in Rupees"
+              placeholder="Ingrese la cantidad en dólares"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="Video">Enter Video ID</label>
+            <label htmlFor="Video">Ingrese la identificación del video</label>
             <input
               type="url"
               name="video"
@@ -257,7 +259,7 @@ const UpdateCourse = () => {
               autoComplete="off"
               value={course.video}
               onChange={handleInputs}
-              placeholder="All characters after last slash. Eg. - qoeLC9Yeo6s from url- https://youtu.be/qoeLC9Yeo6s"
+              placeholder="Todos los caracteres después de la última barra. P.ej. - qoeLC9Yeo6s de url- https://youtu.be/qoeLC9Yeo6s"
               required
             />
           </div>
@@ -284,10 +286,10 @@ const UpdateCourse = () => {
               className="btn green"
             />
             <button className="btn" onClick={cancel}>
-              Cancel
+              Cancelar
             </button>
             <button className="btn red" onClick={deleteData}>
-              Delete Course
+              Eliminar curso
             </button>
           </div>
         </form>

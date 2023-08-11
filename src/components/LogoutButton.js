@@ -18,7 +18,7 @@ const LogoutButton = () => {
     <>
       <div onClick={handleLogout} className="logout-btn">
         <BiLogOut />
-        Log Out
+        Cerrar sesión
       </div>
     </>
   );

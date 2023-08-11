@@ -8,58 +8,56 @@ export const Home = () => {
     <div>
       <div className="p-2">
         <div className="t-flex">
-          <span>Jump into Course Creation</span>
+          <span>Saltar a la creación de cursos</span>
           <Link to="/teacher/courses/add" className="btn-2">
-            Create Your Course
+            Crea tu curso
           </Link>
         </div>
         <div className="p-2">
-          <p>
-            Based on your experience, we think these resources will be helpful.
-          </p>
+          <p>Según su experiencia, creemos que estos recursos serán útiles.</p>
         </div>
         <div className="p-2">
           {/* <img src="" alt="" /> */}
           <div>
-            <h3>Create an Engaging Course</h3>
+            <h3>Crear un curso atractivo</h3>
             <p>
-              Whether you ve been teaching for years or are teaching for the
-              first time, you can make an engagin course. Weve compiled
-              resources and best practice to help you get to the next level, no
-              matter where youre starting.
+              Ya sea que haya estado enseñando durante años o esté enseñando
+              para el primera vez, puedes hacer un curso de participación. Hemos
+              compilado recursos y mejores prácticas para ayudarlo a pasar al
+              siguiente nivel, no importa por dónde empieces.
             </p>
           </div>
         </div>
         <div className="p-2">
           {/* <img src="" alt="" /> */}
           <div>
-            <h3>Get Started with Video</h3>
+            <h3>Empezar con el vídeo</h3>
             <p>
-              Quality video lectures can set your course apart. Use our
-              resources to learn the basics.
+              Las videoconferencias de calidad pueden diferenciar su curso. Usa
+              nuestro recursos para aprender los conceptos básicos.
             </p>
           </div>
           <div>
-            <h3>Build Your Audience</h3>
-            <p>Set your course up for success by building your audience.</p>
+            <h3>Construye tu audiencia</h3>
+            <p>Configure su curso para el éxito construyendo su audiencia.</p>
           </div>
         </div>
         <div className="p-2">
           {/* <img src="" alt="" /> */}
           <div>
-            <h3>Join the Newcomer Challenge:</h3>
+            <h3>Únase al desafío de los recién llegados:</h3>
             <p>
-              Get exclusive tips and resources designed to help you launch your
-              first course faster! Eligible instructors who publish their first
-              course on time will recieve a special bonus to celebrate. Start
-              today!
+              Obtenga consejos y recursos exclusivos diseñados para ayudarlo a
+              lanzar su primer curso más rápido! Instructores elegibles que
+              publiquen su primer el curso a tiempo recibirá un bono especial
+              para celebrar. Comenzar ¡hoy!
             </p>
           </div>
         </div>
         <div className="p-2 t-flex-col">
-          Are You Ready to Begin?
+          ¿Estás listo para comenzar?
           <Link to="/teacher/courses/add" className="btn-2">
-            Create Your Course
+            Crea tu curso
           </Link>
         </div>
       </div>

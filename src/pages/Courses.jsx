@@ -46,7 +46,9 @@ export default function Courses() {
                   <div className="course-title">{item.title}</div>
                 </div>
                 <div className="card-row">
-                  <div className="discription">{item.description}</div>
+                  <div className="discription">
+                    {item.description.slice(0, 100) + '...'}
+                  </div>
                 </div>
                 <div className="card-row"></div>
                 <div className="card-row">

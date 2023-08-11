@@ -124,7 +124,7 @@ function Courses() {
   return (
     <div className="page">
       <br />
-      <h1 className="flex"> All Courses Created by You </h1>{' '}
+      <h1 className="flex"> Todos los cursos creados por usted </h1>{' '}
       <div className="course-grid-4">
         {course.items.courses.courses.map((item) => (
           <div className="card" key={item._id}>

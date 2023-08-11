@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <div className="page">
       <div className="p-2">
-        <h2>Contact Us</h2>
+        <h2>Contacta con nosotros</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos,
           eligendi quibusdam asperiores excepturi aspernatur, repellendus amet

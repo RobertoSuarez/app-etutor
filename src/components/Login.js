@@ -38,13 +38,13 @@ const Login = () => {
   return (
     <>
       <div className="p-4 box">
-        <h2 className="mb-3">Student Login</h2>
+        <h2 className="mb-3">Inicio de sesión del estudiante</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="email"
-              placeholder="Email address"
+              placeholder="Dirección de correo electrónico"
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
@@ -53,7 +53,7 @@ const Login = () => {
             <InputGroup>
               <Form.Control
                 type={showPassword ? 'text' : 'password'} // Usa el estado showPassword para cambiar el tipo de entrada
-                placeholder="Password"
+                placeholder="Contraseña"
                 onChange={(e) => setPassword(e.target.value)}
               />
               <Button
@@ -81,7 +81,7 @@ const Login = () => {
         </div>
       </div>
       <div className="p-4 box mt-3 text-center">
-        Do not have an account? <Link to="/signup">Sign up</Link>
+        ¿No tiene una cuenta? <Link to="/signup">Registrarse</Link>
       </div>
     </>
   );

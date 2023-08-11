@@ -40,13 +40,13 @@ const Login = () => {
     });
 
     if (res.status === 404 || !data) {
-      window.alert('Invalid Credentials');
+      window.alert('Credenciales no válidas');
     } else {
       setIsSignup(true);
       localStorage.setItem('userId', userData.user._id);
       localStorage.setItem('IsLogged', true);
 
-      window.alert('Login Successful');
+      window.alert('Inicio de sesión exitoso');
 
       // navigate("/teacher/");
       window.location.href = '/teacher';
@@ -60,7 +60,7 @@ const Login = () => {
       <section className="create-course">
         <form method="POST" className="course-form">
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
               name="email"
@@ -68,12 +68,12 @@ const Login = () => {
               autoComplete="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter Email"
+              placeholder="Ingresar correo electrónico"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Contraseña</label>
             <input
               type="password"
               name="password"
@@ -81,7 +81,7 @@ const Login = () => {
               autoComplete="off"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter Password"
+              placeholder="Ingresar contraseña"
             />
           </div>
 
