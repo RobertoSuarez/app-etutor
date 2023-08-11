@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
-import '../components/styles/Card.css';
-import { FcClock } from 'react-icons/fc';
-import { BsBarChartFill } from 'react-icons/bs';
-import { BiRupee } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
-import { IoIosArrowForward } from 'react-icons/io';
-import imagePlaceholder from '../placeholder-image.jpg';
 import useCourses from '../hooks/useCourses';
+import { Box, Grid, Typography } from '@mui/material';
+import '../components/styles/Card.css';
+import { CourseCard } from '../components/CourseCard';
 
 export default function Courses() {
   const { courses, isLoading } = useCourses('');
@@ -28,54 +24,21 @@ export default function Courses() {
     );
 
   return (
-    <div className="page">
-      <br />
-      <h1 className="flex"> Todos los cursos </h1>
+    <Box sx={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+      <Box marginX={6} marginY={4}>
+        <Typography variant="h4" mb={2}>
+          Todos los cursos
+        </Typography>
 
-      <div className="course-grid">
-        {courses &&
-          courses.map((item) => (
-            <div className="card" key={item._id}>
-              <img
-                src={item.image || imagePlaceholder}
-                alt={item.title}
-                className="card-img"
-              />
-              <div className="card-content">
-                <div className="card-row">
-                  <div className="course-title">{item.title}</div>
-                </div>
-                <div className="card-row">
-                  <div className="discription">
-                    {item.description.slice(0, 100) + '...'}
-                  </div>
-                </div>
-                <div className="card-row"></div>
-                <div className="card-row">
-                  <div className="level">
-                    <BsBarChartFill />
-                    <span>{item.level}</span>
-                  </div>
-                  <div className="time">
-                    <FcClock />
-                    {item.time} Horas
-                  </div>
-                </div>
-                <div className="card-row">
-                  <div className="price">
-                    <BiRupee />
-                    {item.price}
-                  </div>
-                  <div className="rating">
-                    <Link to={`/learning/${item._id}`}>
-                      Ver <IoIosArrowForward />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
-    </div>
+        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+          {courses &&
+            courses.map((item) => (
+              <Grid item xs={4} key={item._id}>
+                <CourseCard item={item} />
+              </Grid>
+            ))}
+        </Grid>
+      </Box>
+    </Box>
   );
 }

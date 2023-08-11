@@ -46,7 +46,9 @@ export const Settings = () => {
               </Grid>
               <Grid item xs={12}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button variant="contained">Guardar</Button>
+                  <Button variant="contained" color="primary">
+                    Guardar
+                  </Button>
                 </Box>
               </Grid>
             </Grid>
