@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import Typewriter from 'typewriter-effect';
 import { Footer } from '../components/Footer';
-import { Button } from '@mui/material';
 
 export default function Home() {
   const { user } = useUserAuth();
@@ -17,9 +16,6 @@ export default function Home() {
     <div className="home page">
       <div className="hero">
         <h1 className="banner-heading1">Empezar a aprender desde </h1>
-        <Button color="primary" variant="contained">
-          Hola, mundo
-        </Button>
         <span className="banner-heading2">Los mejores maestros del mundo</span>
 
         <div className="content">

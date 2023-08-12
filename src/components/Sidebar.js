@@ -1,70 +1,89 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useState } from 'react';
 import ProfileImage from '../avatar.png';
-import LoginButton from './LoginButton';
-import LogoutButton from './LogoutButton';
+// import LogoutButton from './LogoutButton';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import MovieFilterOutlinedIcon from '@mui/icons-material/MovieFilterOutlined';
+import CastForEducationOutlinedIcon from '@mui/icons-material/CastForEducationOutlined';
+import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplicationsOutlined';
+import ConnectWithoutContactOutlinedIcon from '@mui/icons-material/ConnectWithoutContactOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
-import { AiFillHome } from 'react-icons/ai';
-import { ImBooks } from 'react-icons/im';
-import { FaBookReader } from 'react-icons/fa';
-import { IoMdCart } from 'react-icons/io';
 import {
-  RiUserSettingsFill,
-  RiMessage2Fill,
-  RiInformationFill,
-} from 'react-icons/ri';
+  Avatar,
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 export default function Sidebar() {
   const [sidebar, setSidebar] = useState(false);
   const ShowSidebar = () => setSidebar(!sidebar);
 
-  const { user } = useUserAuth();
+  const { user, logOut } = useUserAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  function CheckUser(user) {
-    if (user) {
-      return true;
+  // function CheckUser(user) {
+  //   if (user) {
+  //     return true;
+  //   }
+  // }
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate('/login');
+    } catch (error) {
+      console.log(error.message);
     }
-  }
+  };
 
   const Links = [
     {
       title: 'Inicio',
-      icon: <AiFillHome />,
+      icon: <HomeOutlinedIcon />,
       path: '/',
     },
     {
       title: 'Todos los cursos',
-      icon: <ImBooks />,
+      icon: <MovieFilterOutlinedIcon />,
       path: '/courses',
     },
     {
       title: 'Mi aprendizaje',
-      icon: <FaBookReader />,
+      icon: <CastForEducationOutlinedIcon />,
       path: '/learning',
     },
     {
-      title: 'Mi carrito',
-      icon: <IoMdCart />,
-      path: '/cart',
-    },
-    {
-      title: 'Configuraciones de la cuenta',
-      icon: <RiUserSettingsFill />,
+      title: 'Configuración',
+      icon: <SettingsApplicationsOutlinedIcon />,
       path: '/settings',
     },
     {
       title: 'Contacta con nosotros',
-      icon: <RiMessage2Fill />,
+      icon: <ConnectWithoutContactOutlinedIcon />,
       path: '/contact',
     },
     {
       title: 'Sobre nosotros',
-      icon: <RiInformationFill />,
+      icon: <InfoOutlinedIcon />,
       path: '/about',
     },
   ];
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <>
@@ -75,9 +94,27 @@ export default function Sidebar() {
         className={sidebar ? 'sidebar active-sidebar' : 'sidebar'}
         onClick={ShowSidebar}
       >
-        <div className="row">
+        <Box
+          sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          mt={3}
+        >
+          <Stack direction={'row'} spacing={2} alignItems={'center'}>
+            <Avatar
+              alt={user.displayName}
+              src={(user && user.photoURL) || ProfileImage}
+              sx={{ width: 48, height: 48 }}
+            />
+            <Stack>
+              <Typography variant="subtitle2">
+                {user && user.displayName}
+              </Typography>
+              <Typography variant="body2">{user && user.email}</Typography>
+            </Stack>
+          </Stack>
+        </Box>
+
+        {/* <div className="row">
           <div className="user-image">
-            {/* <img src="/images/avatar.png" alt="user profile" /> */}
             <img src={(user && user.photoURL) || ProfileImage} />
           </div>
           <div className="center">
@@ -86,9 +123,37 @@ export default function Sidebar() {
 
             <li>{CheckUser(user) ? <></> : <LoginButton />}</li>
           </div>
-        </div>
-        <hr className="sidebar-hr" />
-        <ul className="row">
+        </div> */}
+
+        <Divider sx={{ backgroundColor: 'black', marginTop: 3 }} />
+
+        <List>
+          {Links.map((item, index) => {
+            return (
+              <ListItem disablePadding key={index}>
+                <ListItemButton
+                  LinkComponent={Link}
+                  to={item.path}
+                  selected={location.pathname === item.path}
+                >
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.title}></ListItemText>
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleLogout}>
+              <ListItemIcon>
+                <LogoutOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Cerrar Sesión'}></ListItemText>
+            </ListItemButton>
+          </ListItem>
+        </List>
+
+        {/* <ul className="row">
           {Links.map((item, index) => {
             return (
               <Link to={item.path} key={index} className="sidebar-link">
@@ -102,7 +167,7 @@ export default function Sidebar() {
           <div className="sidebar-link">
             <li>{CheckUser(user) ? <LogoutButton /> : <></>}</li>
           </div>
-        </ul>
+        </ul> */}
       </div>
     </>
   );
