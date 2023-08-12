@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link as LinkNavigation, useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import GoogleButton from 'react-google-button';
 import { useUserAuth } from '../context/UserAuthContext';
 import {
   Box,
   Button,
-  CircularProgress,
   Divider,
   IconButton,
   InputAdornment,
@@ -16,59 +15,47 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import ilustracionRegistro from '../ilustraciones/register-cuate.svg';
-import GoogleButton from 'react-google-button';
+import ilustracionLogin from '../ilustraciones/Fingerprint-pana.svg';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-const Signup = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { logIn, googleSignIn } = useUserAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [success, setSuccess] = useState('');
-  const { signUp, googleSignIn } = useUserAuth();
-  let navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleRegisterGoogle = async () => {
-    const credential = await googleSignIn();
-    if (credential) {
-      setSuccess('Usuario registrado correctamente');
-
-      setTimeout(() => {
-        navigate('/');
-      }, 5000);
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      const credenciales = await signUp(email, password);
-      console.log(credenciales);
-
-      setSuccess('Usuario registrado correctamente');
-
-      setTimeout(() => {
-        navigate('/login');
-      }, 5000);
+      await logIn(email, password);
+      navigate('/');
     } catch (err) {
-      if (err.message === 'Firebase: Error (auth/email-already-in-use).') {
-        setError('El correo ya esta en uso');
-      }
-      //console.log('Mensaje de depuración');
-      //navigate('/signup');
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignIn();
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
   return (
-    <>
+    <Box>
       <Paper
         variant="outlined"
-        sx={{ marginX: 'auto', marginY: 4, width: 500, padding: 4 }}
+        sx={{ marginX: 'auto', p: 4, marginY: 2, width: 500 }}
       >
         <Typography
           variant="h4"
@@ -76,21 +63,12 @@ const Signup = () => {
           fontWeight={500}
           color={'primary'}
         >
-          Registro de estudiantes
+          Inicio de sesión
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <img src={ilustracionRegistro} width={225} />
+          <img src={ilustracionLogin} width={200} />
         </Box>
         {error && <Alert variant="danger">{error}</Alert>}
-        {success && (
-          <Alert variant="success">
-            <Typography variant="subtitle1">{success}</Typography>
-            <Typography variant="caption">
-              Se redireccionara en un segundo{' '}
-              <CircularProgress size={16} sx={{ marginLeft: 1 }} />
-            </Typography>
-          </Alert>
-        )}
         <Stack spacing={3}>
           <TextField
             label="Correo electronico"
@@ -116,19 +94,18 @@ const Signup = () => {
             }}
           />
           <Button variant="contained" onClick={handleSubmit}>
-            Registrarse
+            Iniciar
           </Button>
 
           <Divider color="black" />
 
           <GoogleButton
             style={{ width: '100%' }}
-            label="Registrate con Google"
-            onClick={handleRegisterGoogle}
+            label="Iniciar con Google"
+            onClick={handleGoogleSignIn}
           />
         </Stack>
       </Paper>
-
       <Paper
         variant="outlined"
         sx={{
@@ -140,14 +117,14 @@ const Signup = () => {
         }}
       >
         <Typography variant="body1" color="text.secondary">
-          ¿Ya tienes una cuenta?{' '}
-          <Link color="primary" component={LinkNavigation} to="/login">
-            Iniciar sesión
+          ¿No tiene una cuenta?
+          <Link ml={1} color="primary" component={LinkNavigation} to="/signup">
+            Registrarse
           </Link>
         </Typography>
       </Paper>
-    </>
+    </Box>
   );
 };
 
-export default Signup;
+export default Login;
