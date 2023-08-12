@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useCourses from '../hooks/useCourses';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Typography } from '@mui/material';
 import '../components/styles/Card.css';
 import { CourseCard } from '../components/CourseCard';
 
@@ -13,14 +13,20 @@ export default function Courses() {
 
   if (isLoading)
     return (
-      <div className="loader">
-        <div className="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
+      <Box
+        sx={{
+          height: 'calc(100vh - 80px)',
+          width: '100%',
+        }}
+        display={'flex'}
+        flexDirection={'column'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        gap={3}
+      >
+        <CircularProgress size={62} />
+        <Typography variant="body1">Recuperando los cursos 📚</Typography>
+      </Box>
     );
 
   return (

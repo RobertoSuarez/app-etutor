@@ -7,9 +7,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useUserAuth } from '../context/UserAuthContext';
 
 export const Settings = () => {
+  const { user } = useUserAuth();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
       <Box marginX={6} marginY={4}>
@@ -24,6 +31,7 @@ export const Settings = () => {
                 <TextField
                   label="Nombres"
                   type="text"
+                  value={user.displayName}
                   variant="filled"
                   fullWidth
                 ></TextField>
@@ -40,6 +48,7 @@ export const Settings = () => {
                 <TextField
                   label="Correo electronico"
                   type="email"
+                  value={user.email}
                   variant="filled"
                   fullWidth
                 ></TextField>
