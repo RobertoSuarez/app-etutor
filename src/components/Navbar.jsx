@@ -6,7 +6,8 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 import './styles/NavBar.css';
-import { List } from './List';
+import { MenuListItem } from './MenuListItem';
+import { Box, Typography } from '@mui/material';
 
 export default function Navbar() {
   const Links = [
@@ -73,10 +74,10 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar">
-      <Link to="/">
-        <h1 className="nav-logo">E-Tutor</h1>
-      </Link>
+    <Box className="navbar" alignItems={'center'}>
+      <Typography variant="h4" component={Link} to="/" color={'primary'}>
+        📚e-tutor💻
+      </Typography>
 
       <div
         className={
@@ -121,7 +122,7 @@ export default function Navbar() {
           className="position-absolute top-100 start-0 box-contenedor-resultados"
           style={{ display: open ? 'block' : 'none' }}
         >
-          <List input={inputText} handleClose={handleClose} />
+          <MenuListItem input={inputText} handleClose={handleClose} />
         </div>
       </div>
 
@@ -139,6 +140,6 @@ export default function Navbar() {
           </div>
         </li>
       </ul>
-    </div>
+    </Box>
   );
 }

@@ -1,14 +1,13 @@
 import { React } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import RotateLeftOutlinedIcon from '@mui/icons-material/RotateLeftOutlined';
 import useCourses from '../hooks/useCourses';
 import { useSearchPage } from '../hooks/useSearchPage';
-import { useHistorial } from '../hooks/useHistorial';
 import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
 
 import './styles/List.css';
-import { ListItemCourse } from './ListItemCourse';
+import { MenuListItemCourse } from './MenuListItemCourse';
+import { Box, CircularProgress, Typography } from '@mui/material';
 
 /*
   Ideas que me gustarian que esten en la lista de opciones
@@ -19,10 +18,12 @@ import { ListItemCourse } from './ListItemCourse';
   - Se pueden buscar paginas u opciones de la aplicación
 */
 
-export const List = ({ input = '', handleClose }) => {
-  const { isLoading, error, courses = [] } = useCourses(input);
+export const MenuListItem = ({ input = '', handleClose }) => {
+  // eslint-disable-next-line no-unused-vars
+  let { isLoading, error, courses = [] } = useCourses(input);
+  courses = courses.slice(0, 3);
   const { pages } = useSearchPage(input);
-  const { historial } = useHistorial(input);
+
   const navigate = useNavigate();
 
   // eslint-disable-next-line no-unused-vars
@@ -31,6 +32,7 @@ export const List = ({ input = '', handleClose }) => {
     handleClose();
   };
 
+  // eslint-disable-next-line no-unused-vars
   const onHandleHistory = (h) => {
     console.log('Se dio click en el historial: ', h);
     handleClose();
@@ -45,7 +47,20 @@ export const List = ({ input = '', handleClose }) => {
   if (isLoading) {
     return (
       <div className="box-cargando">
-        <h2 className="texto-base">Cargando datos... 🧠</h2>
+        <Box
+          width={'100%'}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Typography variant="h6" mb={1}>
+            Cargando datos... 🧠
+          </Typography>
+          <CircularProgress size={24} />
+        </Box>
       </div>
     );
   }
@@ -66,7 +81,7 @@ export const List = ({ input = '', handleClose }) => {
       {courses
         ? courses.map((c) => {
             return (
-              <ListItemCourse
+              <MenuListItemCourse
                 key={c._id}
                 className="historial-items"
                 course={c}
@@ -76,7 +91,7 @@ export const List = ({ input = '', handleClose }) => {
           })
         : ''}
 
-      {historial &&
+      {/* {historial &&
         historial.map((h) => {
           return (
             <div
@@ -90,7 +105,7 @@ export const List = ({ input = '', handleClose }) => {
               <div className="historial-text">{h}</div>
             </div>
           );
-        })}
+        })} */}
 
       {pages &&
         pages.map((p) => {
@@ -131,7 +146,7 @@ export const List = ({ input = '', handleClose }) => {
   // );
 };
 
-List.propTypes = {
+MenuListItem.propTypes = {
   input: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
 };

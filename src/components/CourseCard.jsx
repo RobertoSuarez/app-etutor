@@ -17,9 +17,12 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  useTheme,
 } from '@mui/material';
 
 export const CourseCard = ({ item }) => {
+  const theme = useTheme();
+
   const suscribirse = () => {
     alert('Te has suscrito con exito');
   };
@@ -27,10 +30,11 @@ export const CourseCard = ({ item }) => {
   if (true) {
     return (
       <Card
+        variant="elevation"
         sx={{
           maxWidth: 345,
           ':hover': {
-            boxShadow: 10,
+            boxShadow: `${theme.palette.primary.main} 0px 3px 8px`,
           },
         }}
       >
@@ -45,7 +49,7 @@ export const CourseCard = ({ item }) => {
             {item.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {item.description.slice(0, 125) + '...'}
+            {item.description.slice(0, 110) + '...'}
           </Typography>
         </CardContent>
         <CardActions>

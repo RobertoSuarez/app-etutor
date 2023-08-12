@@ -26,7 +26,7 @@ export default function Courses() {
   return (
     <Box sx={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
       <Box marginX={6} marginY={4}>
-        <Typography variant="h4" mb={2}>
+        <Typography variant="h4" mb={2} color="black">
           Todos los cursos
         </Typography>
 
