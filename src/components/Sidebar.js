@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import { useState } from 'react';
 import ProfileImage from '../avatar.png';
@@ -80,10 +80,6 @@ export default function Sidebar() {
       path: '/about',
     },
   ];
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <>

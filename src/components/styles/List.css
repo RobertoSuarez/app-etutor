@@ -65,7 +65,6 @@
 
 .historial-items {
   display: flex;
-  justify-content: start;
   align-items: center;
   padding: 10px 20px;
   cursor: pointer;

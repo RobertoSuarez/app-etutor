@@ -18,15 +18,11 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Course from './pages/Course';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useUserAuth } from './context/UserAuthContext';
 
 export const App = () => {
   const { user } = useUserAuth();
-
-  useEffect(() => {
-    console.log('usuario: ', user);
-  }, []);
 
   if (!user) {
     return <Navigate to="/login" />;
