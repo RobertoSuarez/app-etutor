@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import { Link as LinkNavigation, useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import GoogleButton from 'react-google-button';
 import { useUserAuth } from '../context/UserAuthContext';
 import {
+  Box,
   Button,
-  CircularProgress,
+  Divider,
   IconButton,
   InputAdornment,
   Link,
+  Paper,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
+import ilustracionLogin from '../ilustraciones/Fingerprint-pana.svg';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-const Signup = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { logIn, googleSignIn } = useUserAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [success, setSuccess] = useState('');
-  const { signUp } = useUserAuth();
-  let navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -31,38 +34,41 @@ const Signup = () => {
     e.preventDefault();
     setError('');
     try {
-      const credenciales = await signUp(email, password);
-      console.log(credenciales);
-
-      setSuccess('Usuario registrado correctamente');
-
-      setTimeout(() => {
-        navigate('/login');
-      }, 5000);
+      await logIn(email, password);
+      navigate('/');
     } catch (err) {
-      if (err.message === 'Firebase: Error (auth/email-already-in-use).') {
-        setError('El correo ya esta en uso');
-      }
-      //console.log('Mensaje de depuración');
-      //navigate('/signup');
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignIn();
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
   return (
-    <>
-      <div className="p-4 box">
-        <Typography variant="h4" textAlign={'center'} mb={3}>
-          Registro de estudiantes
+    <Box>
+      <Paper
+        variant="outlined"
+        sx={{ marginX: 'auto', p: 4, marginY: 2, width: 500 }}
+      >
+        <Typography
+          variant="h4"
+          textAlign={'center'}
+          fontWeight={500}
+          color={'primary'}
+        >
+          Inicio de sesión
         </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <img src={ilustracionLogin} width={200} />
+        </Box>
         {error && <Alert variant="danger">{error}</Alert>}
-        {success && (
-          <Alert variant="success">
-            <Typography variant="subtitle1">{success}</Typography>
-            <Typography variant="caption">
-              Se redireccionara en un segundo <CircularProgress size={16} />
-            </Typography>
-          </Alert>
-        )}
         <Stack spacing={3}>
           <TextField
             label="Correo electronico"
@@ -88,20 +94,37 @@ const Signup = () => {
             }}
           />
           <Button variant="contained" onClick={handleSubmit}>
-            Registrarse
+            Iniciar
           </Button>
+
+          <Divider color="black" />
+
+          <GoogleButton
+            style={{ width: '100%' }}
+            label="Iniciar con Google"
+            onClick={handleGoogleSignIn}
+          />
         </Stack>
-      </div>
-      <div className="p-4 box mt-3 text-center">
+      </Paper>
+      <Paper
+        variant="outlined"
+        sx={{
+          marginX: 'auto',
+          marginY: 4,
+          width: 500,
+          padding: 4,
+          textAlign: 'center',
+        }}
+      >
         <Typography variant="body1" color="text.secondary">
-          ¿Ya tienes una cuenta?{' '}
-          <Link color="primary" component={LinkNavigation} to="/login">
-            Iniciar sesión
+          ¿No tiene una cuenta?
+          <Link ml={1} color="primary" component={LinkNavigation} to="/signup">
+            Registrarse
           </Link>
         </Typography>
-      </div>
-    </>
+      </Paper>
+    </Box>
   );
 };
 
-export default Signup;
+export default Login;
