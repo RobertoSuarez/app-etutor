@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import Typewriter from 'typewriter-effect';
 import { Footer } from '../components/Footer';
+import { Box } from '@mui/material';
+import ImagePostal from '../imgs/brooke-cagle.jpg';
 
 export default function Home() {
   const { user } = useUserAuth();
@@ -14,7 +16,15 @@ export default function Home() {
 
   return (
     <div className="home page">
-      <div className="hero">
+      <Box
+        p={4}
+        sx={{
+          backgroundImage: `url(${ImagePostal})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          minHeight: '60vh',
+        }}
+      >
         <h1 className="banner-heading1">Empezar a aprender desde </h1>
         <span className="banner-heading2">Los mejores maestros del mundo</span>
 
@@ -53,7 +63,7 @@ export default function Home() {
         {/* <div className="image">
           <img src="/images/hero.svg" alt="Hero-image" />
         </div> */}
-      </div>
+      </Box>
       <div className="p-2">
         <br />
         <br />

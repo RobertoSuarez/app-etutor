@@ -13,17 +13,47 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import { updateProfile } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export const Settings = () => {
   const { user } = useUserAuth();
   const [displayName, setDisplayName] = useState('');
   const [openBack, setOpenBack] = useState(false);
   const [guardado, setGuardado] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [notification, setNotification] = useState({
+    email: true,
+    push: true,
+    modoOscuro: true,
+  });
 
   useEffect(() => {
     if (user.displayName) setDisplayName(user.displayName);
+
+    const getDataConfig = async () => {
+      if (user.uid) {
+        const notiRef = doc(db, 'users', user.uid);
+        const notiSnap = await getDoc(notiRef);
+        if (notiSnap.exists) {
+          console.log(notiSnap.data().notification);
+          setNotification({ ...notiSnap.data().notification });
+        } else {
+          console.log(notiSnap);
+        }
+      }
+    };
+
+    getDataConfig();
   }, [user]);
+
+  useEffect(() => {
+    console.log(notification);
+    if (user.uid) {
+      const userRef = doc(db, 'users', user.uid);
+      setDoc(userRef, { notification }, { merge: true });
+    }
+  }, [notification]);
 
   const onUpdateProfile = (e) => {
     e.preventDefault();
@@ -41,6 +71,14 @@ export const Settings = () => {
       .finally(() => {
         setOpenBack(false);
       });
+  };
+
+  const handleNotifiaciones = (event) => {
+    const { checked, name } = event.target;
+    setNotification((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
   };
 
   return (
@@ -100,7 +138,11 @@ export const Settings = () => {
             <Typography variant="body2" color={'GrayText'}>
               Enviar notificaciones de nuevos cursos al correo electronico
             </Typography>
-            <Switch></Switch>
+            <Switch
+              checked={notification.email}
+              onChange={handleNotifiaciones}
+              name="email"
+            ></Switch>
           </Box>
           <Box
             sx={{
@@ -112,7 +154,11 @@ export const Settings = () => {
             <Typography variant="body2" color={'GrayText'}>
               Mostrar notificaciones de nuevos cursos en la aplicación
             </Typography>
-            <Switch></Switch>
+            <Switch
+              checked={notification.push}
+              onChange={handleNotifiaciones}
+              name="push"
+            ></Switch>
           </Box>
         </Box>
 
@@ -130,7 +176,11 @@ export const Settings = () => {
             <Typography variant="body2" color={'GrayText'}>
               Activar el modo oscuro
             </Typography>
-            <Switch></Switch>
+            <Switch
+              checked={notification.modoOscuro}
+              onChange={handleNotifiaciones}
+              name="modoOscuro"
+            ></Switch>
           </Box>
         </Box>
       </Box>
