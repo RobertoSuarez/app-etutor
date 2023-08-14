@@ -76,7 +76,7 @@ export default function Navbar() {
   return (
     <Box className="navbar" alignItems={'center'}>
       <Typography variant="h4" component={Link} to="/" color={'primary'}>
-        📚e-tutor💻
+        📚e-tutor
       </Typography>
 
       <div
