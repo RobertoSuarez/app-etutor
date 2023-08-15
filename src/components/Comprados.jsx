@@ -49,7 +49,7 @@ export const Comprados = ({ item }) => {
             </Typography>
           </div>
         </CardContent>
-        <CardActions>
+        <CardActions style={{ justifyContent: 'space-between' }}>
           <Button
             size="small"
             component={Link}

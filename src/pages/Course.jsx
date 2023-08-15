@@ -4,6 +4,7 @@ import { BASE_URL } from '../config';
 import { Button, Grid } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useUserAuth } from '../context/UserAuthContext';
+import jsPDF from 'jspdf';
 
 function Course() {
   const fakeComments = [
@@ -20,6 +21,7 @@ function Course() {
       text: 'Buen curso para escribir un paper!',
     },
   ];
+
   const [course, setCourse] = useState({
     items: [],
     DataisLoaded: false,
@@ -51,6 +53,7 @@ function Course() {
 
     fetchData();
   }, [id, user]);
+  console.log(course);
 
   const handleAddComment = () => {
     if (newComment.trim() !== '') {
@@ -63,6 +66,23 @@ function Course() {
       setNewComment('');
       setComments((prevComments) => [...prevComments, newFakeComment]); // Agregar el nuevo comentario al estado de comentarios
     }
+  };
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const textLines = [
+      `Certificado de culminación del curso ${course.items.course.title}`,
+      `Se acredita los conocimientos de dicho curso a ${user.displayName}.`,
+    ];
+
+    let yPosition = 10;
+
+    textLines.forEach((line) => {
+      doc.text(line, 10, yPosition);
+      yPosition += 10; // Ajusta el valor según el espaciado deseado entre líneas
+    });
+
+    doc.save(`${user.displayName}_pdf.pdf`);
   };
 
   const DataisLoaded = course.DataisLoaded;
@@ -168,13 +188,12 @@ function Course() {
                 alignItems: 'center',
               }}
             >
-              {/* Este div ocupa el 50% del lado izquierdo */}
               <TextField
                 id="outlined-basic"
                 label="Ingresa un comentario"
                 variant="outlined"
                 InputProps={{
-                  style: { width: '234%' }, // Ajusta el porcentaje según tus necesidades
+                  style: { width: '234%' },
                 }}
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
@@ -186,7 +205,6 @@ function Course() {
                 alignItems: 'center',
               }}
             >
-              {/* Este div ocupa el 50% restante del lado derecho y está centrado verticalmente */}
               <div style={{ marginLeft: '0', marginRight: 'auto' }}>
                 <Button
                   variant="contained"
@@ -205,6 +223,10 @@ function Course() {
           <span>Nivel del curso: {course.items.course.level}</span>
           <br />
           <span>Duración del curso: {course.items.course.time}</span>
+          <br />
+          <Button size="small" onClick={generatePDF}>
+            Obtener certificado
+          </Button>
         </div>
         <br />
       </div>
