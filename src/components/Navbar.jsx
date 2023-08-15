@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { React, useRef, useState } from 'react';
 import { IoMdCart } from 'react-icons/io';
 import { MdNotifications } from 'react-icons/md';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import './styles/NavBar.css';
 import { MenuListItem } from './MenuListItem';
 import { Box, Typography } from '@mui/material';
 
-export default function Navbar() {
+export default function Navbar({ handleDrawerOpen }) {
   const Links = [
     { title: 'Teach', path: '/teacher' },
     { title: <IoMdCart />, path: '/cart' },
@@ -75,9 +78,19 @@ export default function Navbar() {
 
   return (
     <Box className="navbar" alignItems={'center'}>
-      <Typography variant="h4" component={Link} to="/" color={'primary'}>
-        📚e-tutor
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h4" component={Link} to="/" color={'primary'}>
+          📚e-tutor
+        </Typography>
+      </Box>
 
       <div
         className={
@@ -143,3 +156,7 @@ export default function Navbar() {
     </Box>
   );
 }
+
+Navbar.propTypes = {
+  handleDrawerOpen: PropTypes.func,
+};

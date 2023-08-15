@@ -20,63 +20,79 @@ import Course from './pages/Course';
 
 import React from 'react';
 import { useUserAuth } from './context/UserAuthContext';
+import { Box, CssBaseline, Drawer } from '@mui/material';
+import { useState } from 'react';
 
 export const App = () => {
   const { user } = useUserAuth();
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const handleDrawerOpen = () => {
+    console.log('Abrir el menu de mi aplicación preciosa');
+    setOpenDrawer(!openDrawer);
+  };
 
   if (!user) {
     return <Navigate to="/login" />;
   }
 
   return (
-    <>
-      <div className="app-wrap">
-        <Navbar />
+    <Box sx={{ display: 'flex', flexDirection: 'column' }} className="app-wrap">
+      <CssBaseline />
 
+      <Navbar handleDrawerOpen={handleDrawerOpen} />
+
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        open={openDrawer}
+        onClick={handleDrawerOpen}
+      >
         <Sidebar />
-        <div className="app">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/learning"
-              element={
-                <ProtectedRoute>
-                  <Learning />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/cart"
-              element={
-                <ProtectedRoute>
-                  <Cart />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <ProtectedRoute>
-                  <Settings />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/about" element={<About />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route
-              path="/learning/:id"
-              element={
-                <ProtectedRoute>
-                  <Course />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </div>
-      </div>
-    </>
+      </Drawer>
+
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/learning"
+            element={
+              <ProtectedRoute>
+                <Learning />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/about" element={<About />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/learning/:id"
+            element={
+              <ProtectedRoute>
+                <Course />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Box>
+    </Box>
   );
 };

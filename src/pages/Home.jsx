@@ -53,7 +53,7 @@ export default function Home() {
         <Divider sx={{ marginY: 4, backgroundColor: 'black' }} />
 
         <Typography variant="h6" fontWeight={300}>
-          Graficas de tus estudios
+          Gráficas de tus estudios
         </Typography>
 
         <Grid
@@ -72,7 +72,7 @@ export default function Home() {
                 alignItems: 'center',
               }}
             >
-              <Typography variant="h6">Grafica</Typography>
+              <Typography variant="h6">Gráfica</Typography>
             </Paper>
           </Grid>
           <Grid item xs={4}>
@@ -84,7 +84,7 @@ export default function Home() {
                 alignItems: 'center',
               }}
             >
-              <Typography variant="h6">Grafica</Typography>
+              <Typography variant="h6">Gráfica</Typography>
             </Paper>
           </Grid>
         </Grid>
