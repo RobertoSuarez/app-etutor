@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import useCourses from '../hooks/useCourses';
-import { CourseCard } from '../components/CourseCard';
+import { Comprados } from '../components/Comprados';
 
 export default function Home() {
   const { user } = useUserAuth();
@@ -42,7 +42,7 @@ export default function Home() {
           {!isLoading ? (
             courses.map((item) => (
               <Grid item xs={4} key={item._id}>
-                <CourseCard item={item} />
+                <Comprados item={item} />
               </Grid>
             ))
           ) : (
