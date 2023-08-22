@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Compontent import
-import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 
 // Pages import
@@ -20,13 +19,62 @@ import Course from './pages/Course';
 
 import React from 'react';
 import { useUserAuth } from './context/UserAuthContext';
-import { Box, CssBaseline, Drawer } from '@mui/material';
+import {
+  AppBar as MuiAppBar,
+  Box,
+  CssBaseline,
+  Drawer,
+  IconButton,
+  Toolbar,
+  styled,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import Navbar from './components/Navbar';
+
+const drawerWidth = 325;
+
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(0),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${drawerWidth}px`,
+    ...(open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  })
+);
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
 
 export const App = () => {
   const { user } = useUserAuth();
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  // eslint-disable-next-line no-unused-vars
   const handleDrawerOpen = () => {
     console.log('Abrir el menu de mi aplicación preciosa');
     setOpenDrawer(!openDrawer);
@@ -37,21 +85,46 @@ export const App = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }} className="app-wrap">
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
-      <Navbar handleDrawerOpen={handleDrawerOpen} />
+      {/* <Navbar handleDrawerOpen={handleDrawerOpen} /> */}
+
+      <AppBar
+        component="nav"
+        position="fixed"
+        open={openDrawer}
+        color="inherit"
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 1, ...(openDrawer && { display: 'none' }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Navbar handleDrawerOpen={handleDrawerOpen} />
+        </Toolbar>
+      </AppBar>
 
       <Drawer
-        variant="temporary"
+        variant="persistent"
         anchor="left"
         open={openDrawer}
-        onClick={handleDrawerOpen}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': { width: drawerWidth, boxSizing: 'border-box' },
+        }}
       >
-        <Sidebar />
+        <Sidebar handleDrawerOpen={handleDrawerOpen} />
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1 }}>
+      <Main open={openDrawer}>
+        <Toolbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -92,7 +165,7 @@ export const App = () => {
             }
           />
         </Routes>
-      </Box>
+      </Main>
     </Box>
   );
 };

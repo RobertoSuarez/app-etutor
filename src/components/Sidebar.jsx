@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ import ConnectWithoutContactOutlinedIcon from '@mui/icons-material/ConnectWithou
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 import {
   Avatar,
@@ -35,6 +35,8 @@ export default function Sidebar({ handleDrawerOpen }) {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
+
+  const buttonCloseRef = useRef(null);
 
   const { user, logOut } = useUserAuth();
   const navigate = useNavigate();
@@ -89,27 +91,18 @@ export default function Sidebar({ handleDrawerOpen }) {
   ];
 
   return (
-    <Box minWidth={325}>
+    <Box width={'100%'}>
       <Box
         sx={{
           width: '100%',
           display: 'flex',
           flexDirection: 'row',
-          gap: 1,
+          justifyContent: 'space-between',
+          gap: 4,
         }}
         mt={3}
         paddingX={2}
       >
-        <Box>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-          >
-            <MenuIcon />
-          </IconButton>
-        </Box>
         <Stack direction={'row'} spacing={2} alignItems={'center'}>
           <Avatar
             alt={user.displayName}
@@ -123,6 +116,18 @@ export default function Sidebar({ handleDrawerOpen }) {
             <Typography variant="body2">{user && user.email}</Typography>
           </Stack>
         </Stack>
+
+        <Box>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            ref={buttonCloseRef}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
       </Box>
       {/* <div className="row">
           <div className="user-image">
@@ -182,4 +187,5 @@ export default function Sidebar({ handleDrawerOpen }) {
 
 Sidebar.propTypes = {
   handleDrawerOpen: PropTypes.func,
+  statusDrawer: PropTypes.bool.isRequired,
 };

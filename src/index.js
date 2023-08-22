@@ -9,20 +9,23 @@ import { theme } from './Theme';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import { StyledEngineProvider } from '@mui/material';
 
 // eslint-disable-next-line react/no-deprecated
 ReactDOM.render(
   <React.StrictMode>
     <UserAuthContextProvider>
       <ThemeProvider theme={theme}>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/*" element={<App />} />
-            <Route path="/teacher/*" element={<Teacher />} />
-          </Routes>
-        </Router>
+        <StyledEngineProvider injectFirst>
+          <Router>
+            <Routes>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/*" element={<App />} />
+              <Route path="/teacher/*" element={<Teacher />} />
+            </Routes>
+          </Router>
+        </StyledEngineProvider>
       </ThemeProvider>
     </UserAuthContextProvider>
   </React.StrictMode>,
