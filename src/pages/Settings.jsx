@@ -28,9 +28,12 @@ export const Settings = () => {
     modoOscuro: true,
   });
 
+  const [loadConfig, setLoadConfig] = useState(false);
+
   useEffect(() => {
     if (user.displayName) setDisplayName(user.displayName);
 
+    // Recuperamos los datos de configuración de firebase
     const getDataConfig = async () => {
       if (user.uid) {
         const notiRef = doc(db, 'users', user.uid);
@@ -39,8 +42,15 @@ export const Settings = () => {
           console.log(notiSnap.data().notification);
           setNotification({ ...notiSnap.data().notification });
         } else {
+          setNotification({
+            email: true,
+            push: true,
+            modoOscuro: true,
+          });
           console.log(notiSnap);
         }
+
+        setLoadConfig(true);
       }
     };
 
@@ -48,8 +58,7 @@ export const Settings = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log(notification);
-    if (user.uid) {
+    if (user.uid && loadConfig) {
       const userRef = doc(db, 'users', user.uid);
       setDoc(userRef, { notification }, { merge: true });
     }
@@ -73,6 +82,7 @@ export const Settings = () => {
       });
   };
 
+  // Toma los valores de los campos y lo actualiza en el state
   const handleNotifiaciones = (event) => {
     const { checked, name } = event.target;
     setNotification((prevState) => ({
