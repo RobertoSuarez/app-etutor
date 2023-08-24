@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FcClock } from 'react-icons/fc';
 import { BsBarChartFill } from 'react-icons/bs';
 import { BiRupee } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
 import imagePlaceholder from '../placeholder-image.jpg';
-import { BASE_URL } from '../config';
+import { useUserAuth } from '../context/UserAuthContext';
 
 const CreateCourse = () => {
-  //   title, description, image, user
-  let navigate = useNavigate();
   const teacherId = localStorage.getItem('userId');
   // console.log(teacherId);
+
+  const { user } = useUserAuth();
 
   const [course, setCourse] = useState({
     title: '',
@@ -27,7 +26,6 @@ const CreateCourse = () => {
   let name, value;
 
   const handleInputs = (e) => {
-    console.log(e);
     name = e.target.name;
     value = e.target.value;
 
@@ -37,33 +35,38 @@ const CreateCourse = () => {
   const PostData = async (e) => {
     e.preventDefault();
 
-    const { title, description, image, level, time, price, video, user } =
-      course;
+    // const { title, description, image, level, time, price, video, user } =
+    //   course;
 
-    const res = await fetch(`${BASE_URL}/api/course/add`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title,
-        description,
-        image,
-        level,
-        time,
-        price,
-        video,
-        user,
-      }),
+    console.log({
+      ...course,
+      user: user.uid,
     });
-    const data = await res.json();
 
-    if (data.status === 422 || !data) {
-      window.alert('Registro fallido');
-    } else {
-      window.alert('Curso agregado exitosamente');
-      navigate('/teacher/courses');
-    }
+    // const res = await fetch(`${BASE_URL}/api/course/add`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     title,
+    //     description,
+    //     image,
+    //     level,
+    //     time,
+    //     price,
+    //     video,
+    //     user,
+    //   }),
+    // });
+    // const data = await res.json();
+
+    // if (data.status === 422 || !data) {
+    //   window.alert('Registro fallido');
+    // } else {
+    //   window.alert('Curso agregado exitosamente');
+    //   navigate('/teacher/courses');
+    // }
   };
 
   return (

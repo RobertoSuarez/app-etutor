@@ -9,7 +9,7 @@ export const Home = () => {
       <div className="p-2">
         <div className="t-flex">
           <span>Saltar a la creación de cursos</span>
-          <Link to="/teacher/courses/add" className="btn-2">
+          <Link to="/teacher/courses/init" className="btn-2">
             Crea tu curso
           </Link>
         </div>
