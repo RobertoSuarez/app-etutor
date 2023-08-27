@@ -1,151 +1,86 @@
 import '../components/styles/Card.css';
-import { Link } from 'react-router-dom';
-import { RiEdit2Fill } from 'react-icons/ri';
 import React, { useEffect, useState } from 'react';
-import { BASE_URL } from '../config';
+import { Link } from 'react-router-dom';
+import { useUserAuth } from '../context/UserAuthContext';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
+import { ListCourse } from './components/ListCourse';
 
-// class Course extends React.Component {
-//   // Constructor
-//   constructor(props) {
-//     super(props);
+export const Courses = () => {
+  const { user } = useUserAuth();
 
-//     this.state = {
-//       items: [],
-//       DataisLoaded: false,
-//     };
-//   }
+  const [courses, setCourses] = useState([]);
+  const [search, setSearch] = useState('');
 
-//   // ComponentDidMount is used to
-//   // execute the code
-//   componentDidMount() {
-//     fetch("http://localhost:5000/api/course/user/62aa0246021c9967041f94c9")
-//       .then((res) => res.json())
-//       .then((json) => {
-//         this.setState({
-//           items: json,
-//           DataisLoaded: true,
-//         });
-//       });
-//   }
-
-//   render() {
-//     const { DataisLoaded, items } = this.state;
-//     if (!DataisLoaded)
-//       return (
-//         <div className="loader">
-//           <div className="lds-ring">
-//             <div></div>
-//             <div></div>
-//             <div></div>
-//             <div></div>
-//           </div>
-//         </div>
-//       );
-
-//     return (
-//       <div className="page">
-//         <br />
-//         <h1 className="flex"> All Courses Created by You </h1>{" "}
-//         <div className="course-grid-4">
-//           {items.courses.courses.map((item) => (
-//             <div className="card" key={item._id}>
-//               <img src={item.image} alt={item.title} className="card-img" />
-//               <div className="card-content">
-//                 <div className="card-row">
-//                   <div className="course-title">
-//                     {item.title.slice(0, 20) + "  ..."}
-//                   </div>
-//                   <div className="edit">
-//                     <Link to={`/teacher/courses/update/${item._id}`}>
-//                       <RiEdit2Fill /> Edit
-//                     </Link>
-//                   </div>
-//                 </div>
-//                 {/* <div className="card-row">
-//                   <div className="course-description">
-//                       {item.description}
-//                   </div>
-//                 </div> */}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-const teacherId = localStorage.getItem('userId');
-// console.log(teacherId);
-
-function Courses() {
-  const [course, setCourse] = useState({
-    items: [],
-    DataisLoaded: false,
-  });
-  // const [teacher, setTeacher] = useState({
-  //   items: [],
-  //   DataisLoadedT: false,
-  // });
-  // const { id } = useParams();
-
+  // Obtener los cursos del usuario
   useEffect(() => {
-    const url = `${BASE_URL}/api/course/user/${teacherId}`;
+    if (!user.uid) return;
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        setCourse({
-          items: json,
-          DataisLoaded: true,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    try {
+      const docRef = doc(db, 'users', user.uid);
 
-    fetchData();
-  }, []);
+      const subscriber = onSnapshot(docRef, (doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+          console.log(userData);
+          let cursos = [{ title: '' }];
+          cursos = userData.cursos;
+          if (search) {
+            cursos = cursos.filter((item) => item.title.includes(search));
+          }
+          setCourses(cursos);
+        } else {
+          console.log('No existe esos datos');
+        }
+      });
 
-  const DataisLoaded = course.DataisLoaded;
+      // Deja de subscribirse a los datos
+      return () => {
+        subscriber();
+      };
+    } catch (e) {
+      console.log('Error: ', e);
+    }
+  }, [user, search]);
 
-  if (!DataisLoaded)
-    return (
-      <div className="loader">
-        <div className="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    );
   return (
-    <div className="page">
-      <br />
-      <h1 className="flex"> Todos los cursos creados por usted </h1>{' '}
-      <div className="course-grid-4">
-        {course.items.courses.courses.map((item) => (
-          <div className="card" key={item._id}>
-            <img src={item.image} alt={item.title} className="card-img" />
-            <div className="card-content">
-              <div className="card-row">
-                <div className="course-title">
-                  {item.title.slice(0, 20) + '  ...'}
-                </div>
-                <div className="edit">
-                  <Link to={`/teacher/courses/update/${item._id}`}>
-                    <RiEdit2Fill /> Edit
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+    <Box marginX={6} marginY={4}>
+      <Typography variant="h4">Cursos</Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '3.2rem',
+          my: 2,
+        }}
+      >
+        <Box sx={{ display: 'flex' }}>
+          <TextField
+            variant="outlined"
+            label="Busca en tus cursos"
+            sx={{ width: 300 }}
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </Box>
 
-export default Courses;
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          component={Link}
+          to={'./init'}
+        >
+          Nuevo Curso
+        </Button>
+      </Box>
+
+      <ListCourse courses={courses} />
+    </Box>
+  );
+};

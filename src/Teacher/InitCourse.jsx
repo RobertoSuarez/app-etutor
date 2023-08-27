@@ -73,7 +73,7 @@ export const InitCourse = () => {
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
-    navigate('/courses');
+    navigate('/teacher/courses');
   };
 
   return (

@@ -187,5 +187,4 @@ export default function Sidebar({ handleDrawerOpen }) {
 
 Sidebar.propTypes = {
   handleDrawerOpen: PropTypes.func,
-  statusDrawer: PropTypes.bool.isRequired,
 };

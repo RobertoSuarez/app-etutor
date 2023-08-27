@@ -7,7 +7,7 @@ import { Home } from './Home';
 import Signup from './Signup';
 import Login from './Login';
 import UpdateCourse from './Udate';
-import Courses from './Courses';
+import { Courses } from './Courses';
 import { InitCourse } from './InitCourse';
 
 export default function Teacher() {
