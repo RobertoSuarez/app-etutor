@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export const ListCourse = ({ courses = [] }) => {
   return (
@@ -67,7 +68,13 @@ const ListCourseItem = ({ course }) => {
           flex: 1,
         }}
       >
-        <Button variant="outlined">Editar / gestionar curso</Button>
+        <Button
+          variant="outlined"
+          LinkComponent={Link}
+          to={`./${course.cursoID}/manage`}
+        >
+          Editar / gestionar curso
+        </Button>
       </Box>
     </Box>
   );

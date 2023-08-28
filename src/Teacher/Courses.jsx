@@ -46,7 +46,8 @@ export const Courses = () => {
 
   return (
     <Box marginX={6} marginY={4}>
-      <Typography variant="h4">Cursos</Typography>
+      <Typography variant="h4">Cursos </Typography>
+
       <Box
         sx={{
           display: 'flex',

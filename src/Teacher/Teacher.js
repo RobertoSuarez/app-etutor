@@ -6,9 +6,9 @@ import CreateCourse from './CreateCourse';
 import { Home } from './Home';
 import Signup from './Signup';
 import Login from './Login';
-import UpdateCourse from './Udate';
 import { Courses } from './Courses';
 import { InitCourse } from './InitCourse';
+import { CourseUpdate } from './CourseUpdate';
 
 export default function Teacher() {
   return (
@@ -21,7 +21,7 @@ export default function Teacher() {
         <Route path="/courses/" element={<Courses />} />
         <Route path="/courses/add" element={<CreateCourse />} />
         <Route path="/courses/init" element={<InitCourse />} />
-        <Route path="/courses/update/:id" element={<UpdateCourse />} />
+        <Route path="/courses/:id/manage" element={<CourseUpdate />} />
       </Routes>
     </div>
   );
