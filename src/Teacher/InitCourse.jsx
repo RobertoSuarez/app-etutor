@@ -71,6 +71,10 @@ export const InitCourse = () => {
       });
   };
 
+  const handlePageBack = () => {
+    navigate(-1);
+  };
+
   const handleCloseDialog = () => {
     setDialogOpen(false);
     navigate('/teacher/courses');
@@ -126,16 +130,18 @@ export const InitCourse = () => {
                 fullWidth
                 sx={{ my: 2 }}
               />
-              <div>
+              <Box display={'flex'} gap={3} my={1}>
                 <Button
                   variant="contained"
                   disabled={course.name.length < 10 ? true : false}
                   onClick={handleNext}
-                  sx={{ mt: 1, mr: 1 }}
                 >
                   Continuar
                 </Button>
-              </div>
+                <Button variant="text" onClick={handlePageBack}>
+                  Cancelar
+                </Button>
+              </Box>
             </StepContent>
           </Step>
           <Step key={2}>
