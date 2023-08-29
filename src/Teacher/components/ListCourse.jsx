@@ -27,7 +27,7 @@ const ListCourseItem = ({ course }) => {
         height: '8rem',
       }}
     >
-      <Box width={'10rem'} height={'100%'} bgcolor={'red'}>
+      <Box width={'10rem'} height={'100%'}>
         <img
           width={'100%'}
           height={'100%'}
@@ -71,7 +71,7 @@ const ListCourseItem = ({ course }) => {
         <Button
           variant="outlined"
           LinkComponent={Link}
-          to={`./${course.cursoID}/manage`}
+          to={`./${course.cursoID}/manage/basics`}
         >
           Editar / gestionar curso
         </Button>
