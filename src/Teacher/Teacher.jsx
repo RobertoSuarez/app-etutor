@@ -22,6 +22,16 @@ export default function Teacher() {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             e-tutor modo profesor
           </Typography>
+
+          <Button
+            color="inherit"
+            variant="text"
+            component={Link}
+            to="/"
+            sx={{ mr: 2 }}
+          >
+            Estudiante
+          </Button>
           <Button
             color="inherit"
             variant="outlined"

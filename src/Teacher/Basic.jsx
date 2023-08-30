@@ -11,7 +11,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import React from 'react';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 const categoriasDeCursos = [
   'Desarrollo Web',
@@ -21,7 +24,21 @@ const categoriasDeCursos = [
   'Salud y Bienestar',
 ];
 
-export const Basic = () => {
+export const Basic = ({ handleSaveBasicFireStore, databasic, photoURL }) => {
+  const { register, handleSubmit, watch, reset } = useForm();
+
+  const onSubmit = (data) => {
+    handleSaveBasicFireStore(data);
+  };
+
+  useEffect(() => {
+    reset(databasic);
+
+    // console.log(databasic);
+  }, [databasic]);
+
+  console.log(watch('title'));
+
   return (
     <Box sx={{ display: 'flex', width: '100%' }}>
       <Paper sx={{ marginY: 3, marginX: 4, flex: 1, padding: 3 }} elevation={3}>
@@ -30,6 +47,7 @@ export const Basic = () => {
         </Typography>
         <Divider color="black" />
         <form
+          onSubmit={handleSubmit(onSubmit)}
           style={{
             margin: '2rem 0px',
             display: 'flex',
@@ -38,12 +56,15 @@ export const Basic = () => {
           }}
         >
           <TextField
+            defaultValue="Curso de golang"
+            {...register('title')}
             label="Título del curso"
             variant="outlined"
             fullWidth
             helperText="Tu título tiene que ser claro pero llamativo, tiene que captar la atención y debe estar optimizado para la búsqueda."
           />
           <TextField
+            {...register('subtitle')}
             label="Subtítulo del curso"
             variant="outlined"
             fullWidth
@@ -52,6 +73,7 @@ export const Basic = () => {
 
           <TextField
             label="Descripción del curso"
+            {...register('description')}
             variant="outlined"
             multiline
             fullWidth
@@ -61,7 +83,8 @@ export const Basic = () => {
           <FormControl fullWidth>
             <InputLabel id="categoria">Categoria</InputLabel>
             <Select
-              name="category"
+              defaultValue={''}
+              {...register('category')}
               variant="outlined"
               labelId="categoria"
               label="Categoria"
@@ -73,6 +96,10 @@ export const Basic = () => {
               ))}
             </Select>
           </FormControl>
+
+          <Button type="submit" color="primary" variant="contained">
+            Guardar
+          </Button>
         </form>
 
         {/* Foto */}
@@ -83,7 +110,10 @@ export const Basic = () => {
         <Grid container sx={{ border: 'solid 1px black' }}>
           <Grid item xs={6}>
             <img
-              src="https://s.udemycdn.com/course/750x422/placeholder.jpg"
+              src={
+                photoURL ||
+                'https://s.udemycdn.com/course/750x422/placeholder.jpg'
+              }
               width="100%"
             />
           </Grid>
@@ -128,4 +158,10 @@ export const Basic = () => {
       </Paper>
     </Box>
   );
+};
+
+Basic.propTypes = {
+  handleSaveBasicFireStore: PropTypes.func.isRequired,
+  databasic: PropTypes.object,
+  photoURL: PropTypes.string,
 };

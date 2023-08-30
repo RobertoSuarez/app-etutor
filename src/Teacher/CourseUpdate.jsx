@@ -17,6 +17,9 @@ import CoPresentOutlinedIcon from '@mui/icons-material/CoPresentOutlined';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import { Basic } from './Basic';
 import { useEffect } from 'react';
+import { doc, onSnapshot, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { useState } from 'react';
 
 const drawerWidth = 300;
 
@@ -38,9 +41,32 @@ export const CourseUpdate = () => {
   const { id } = useParams();
   const location = useLocation();
 
+  const [basics, setBasics] = useState({});
+  const [photoURL, setPhotoURL] = useState('');
+
   useEffect(() => {
-    console.log(id);
-  }, []);
+    const unsub = onSnapshot(doc(db, 'courses', id), (doc) => {
+      if (doc.exists()) {
+        const {
+          basics: { title, subtitle, category, description, photoURL },
+        } = doc.data();
+        setBasics({ title, subtitle, category, description });
+        setPhotoURL(photoURL);
+      }
+    });
+
+    return () => {
+      unsub();
+    };
+  }, [id]);
+
+  const handleSaveBasicFireStore = (data) => {
+    console.log(data);
+
+    const courseRef = doc(db, 'courses', id);
+
+    setDoc(courseRef, { basics: { ...data } }, { merge: true });
+  };
 
   return (
     <Box display={'flex'}>
@@ -76,7 +102,16 @@ export const CourseUpdate = () => {
       </Drawer>
       <Box sx={{ display: 'flex', flex: 1 }}>
         <Routes>
-          <Route path="/basics" element={<Basic />}></Route>
+          <Route
+            path="/basics"
+            element={
+              <Basic
+                handleSaveBasicFireStore={handleSaveBasicFireStore}
+                databasic={basics}
+                photoURL={photoURL}
+              />
+            }
+          ></Route>
           <Route
             path="/goals"
             element={<Typography>Objetivos</Typography>}
