@@ -53,7 +53,9 @@ function Course() {
 
     fetchData();
   }, [id, user]);
-  console.log(course);
+  console.log('course' + course);
+  console.log('id del curso ' + id);
+  console.log(JSON.stringify(user, null, 2));
 
   const handleAddComment = () => {
     if (newComment.trim() !== '') {
@@ -222,7 +224,7 @@ function Course() {
           <h3>Detalles del curso</h3>
           <span>Nivel del curso: {course.items.course.level}</span>
           <br />
-          <span>Duración del curso: {course.items.course.time}</span>
+          <span>Duración del curso: {course.items.course.time} Horas</span>
           <br />
           <Button size="small" onClick={generatePDF}>
             Obtener certificado

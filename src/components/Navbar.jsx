@@ -13,7 +13,7 @@ import { Box, Typography } from '@mui/material';
 // eslint-disable-next-line no-unused-vars
 export default function Navbar({ handleDrawerOpen }) {
   const Links = [
-    { title: 'Teach', path: '/teacher/courses' },
+    { title: 'Modo profesor', path: '/teacher/courses' },
     { title: <IoMdCart />, path: '/cart' },
   ];
 
