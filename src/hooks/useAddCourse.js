@@ -29,7 +29,7 @@ export const useAddCourse = () => {
       userID: user.uid,
       basics: {
         title: name,
-        subTitle: '',
+        subtitle: '',
         category: category,
         description: '',
         date: Timestamp.now(), // fecha de creación

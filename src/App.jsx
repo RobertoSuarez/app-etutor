@@ -72,7 +72,7 @@ const AppBar = styled(MuiAppBar, {
 
 export const App = () => {
   const { user } = useUserAuth();
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(true);
 
   // eslint-disable-next-line no-unused-vars
   const handleDrawerOpen = () => {
