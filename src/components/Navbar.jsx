@@ -2,16 +2,17 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { React, useRef, useState } from 'react';
 import { IoMdCart } from 'react-icons/io';
-import { MdNotifications } from 'react-icons/md';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 
 import './styles/NavBar.css';
 import { MenuListItem } from './MenuListItem';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 // eslint-disable-next-line no-unused-vars
 export default function Navbar({ handleDrawerOpen }) {
+  // eslint-disable-next-line no-unused-vars
   const Links = [
     { title: 'Modo profesor', path: '/teacher/courses' },
     { title: <IoMdCart />, path: '/cart' },
@@ -19,6 +20,7 @@ export default function Navbar({ handleDrawerOpen }) {
 
   const [notification, setNotification] = useState(false);
 
+  // eslint-disable-next-line no-unused-vars
   const showNotification = () => setNotification(!notification);
 
   const [inputText, setInputText] = useState('');
@@ -132,20 +134,14 @@ export default function Navbar({ handleDrawerOpen }) {
         </div>
       </div>
 
-      <ul className="nav-link">
-        {Links.map((item, index) => {
-          return (
-            <li key={index}>
-              <Link to={item.path}>{item.title}</Link>
-            </li>
-          );
-        })}
-        <li>
-          <div onClick={showNotification} className="pointer">
-            <MdNotifications />
-          </div>
-        </li>
-      </ul>
+      <Button
+        variant="text"
+        component={Link}
+        to="/teacher/courses"
+        startIcon={<LocalLibraryIcon />}
+      >
+        Modo profesor
+      </Button>
     </Box>
   );
 }

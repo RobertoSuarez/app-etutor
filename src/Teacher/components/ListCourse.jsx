@@ -7,7 +7,7 @@ export const ListCourse = ({ courses = [] }) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {courses.map((course) => (
-        <ListCourseItem key={course.cursoID} course={course} />
+        <ListCourseItem key={course.id} course={course} />
       ))}
     </Box>
   );
@@ -18,6 +18,12 @@ ListCourse.propTypes = {
 };
 
 const ListCourseItem = ({ course }) => {
+  console.log(course);
+
+  if (!course) {
+    return <Box>Cargando ...</Box>;
+  }
+
   return (
     <Box
       sx={{
@@ -35,8 +41,8 @@ const ListCourseItem = ({ course }) => {
             objectFit: 'cover',
           }}
           src={
-            course.photoURL
-              ? course.photoURL
+            course.basics.photoURL
+              ? course.basics.photoURL
               : 'https://s.udemycdn.com/course/200_H/placeholder.jpg'
           }
         />
@@ -53,10 +59,10 @@ const ListCourseItem = ({ course }) => {
         }}
       >
         <Typography variant="subtitle1" fontWeight={500}>
-          {course.title}
+          {course.basics.title}
         </Typography>
         <Typography variant="caption">
-          {course.public ? 'Publicado' : 'Sin publicar'}
+          {course.basics.public ? 'Publicado' : 'Sin publicar'}
         </Typography>
       </Box>
 
@@ -71,7 +77,7 @@ const ListCourseItem = ({ course }) => {
         <Button
           variant="outlined"
           LinkComponent={Link}
-          to={`./${course.cursoID}/manage/basics`}
+          to={`./${course.id}/manage/basics`}
         >
           Editar / gestionar curso
         </Button>

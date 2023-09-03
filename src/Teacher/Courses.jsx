@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { ListCourse } from './components/ListCourse';
 
@@ -17,31 +17,51 @@ export const Courses = () => {
   useEffect(() => {
     if (!user.uid) return;
 
-    try {
-      const docRef = doc(db, 'users', user.uid);
+    const getData = async () => {
+      try {
+        // Obtener todos los cursos con el id del usuario
+        const coursesRef = collection(db, 'courses');
 
-      const subscriber = onSnapshot(docRef, (doc) => {
-        if (doc.exists()) {
-          const userData = doc.data();
-          console.log(userData);
-          let cursos = [{ title: '' }];
-          cursos = userData.cursos;
-          if (search) {
-            cursos = cursos.filter((item) => item.title.includes(search));
-          }
-          setCourses(cursos);
-        } else {
-          console.log('No existe esos datos');
-        }
-      });
+        // creamos el query
+        const q = query(coursesRef, where('userID', '==', user.uid));
 
-      // Deja de subscribirse a los datos
-      return () => {
-        subscriber();
-      };
-    } catch (e) {
-      console.log('Error: ', e);
-    }
+        const querySnapshot = await getDocs(q);
+
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log(data);
+
+        setCourses(data);
+
+        // const docRef = doc(db, 'users', user.uid);
+
+        // const subscriber = onSnapshot(q, (doc) => {
+        //   if (doc.exists()) {
+        //     const userData = doc.data();
+        //     console.log(userData);
+        //     let cursos = [{ title: '' }];
+        //     cursos = userData.cursos;
+        //     if (search) {
+        //       cursos = cursos.filter((item) => item.title.includes(search));
+        //     }
+        //     setCourses(cursos);
+        //   } else {
+        //     console.log('No existe esos datos');
+        //   }
+        // });
+
+        // Deja de subscribirse a los datos
+        // return () => {
+        //   subscriber();
+        // };
+      } catch (e) {
+        console.log('Error: ', e);
+      }
+    };
+
+    getData();
   }, [user, search]);
 
   return (
@@ -81,7 +101,7 @@ export const Courses = () => {
         </Button>
       </Box>
 
-      <ListCourse courses={courses} />
+      {courses && <ListCourse courses={courses} />}
     </Box>
   );
 };
